@@ -1,0 +1,185 @@
+<div style="padding-top: {{ section.settings.padding }}px; padding-bottom: {{ section.settings.padding }}px; background-color: {{ section.settings.background_color }}">
+{% if section.settings.titletext != blank %}
+    <div class="section-header text-center">
+      <h2>{{ section.settings.titletext | escape }}</h2>
+    </div>
+  {% endif %}
+
+<div class="mini-faq">
+
+  <div class="mini-faq-cards">
+
+    {% if section.blocks.size == 0 %}
+
+        <div class="mini-faq-card e-faq-animate" style="border-color: {{ section.settings.border_color }}">
+          <div class="mini-question">
+            <div class="mini-question-icon">
+              <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle">
+                  <g id="Icons/message-circle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <path d="M4.58113883,19.4188612 L8.38377223,18.1513167 C8.63671809,18.0670014 8.91286142,18.0871917 9.15085336,18.207402 C10.1883822,18.7314602 11.3350271,19.003034 12.499613,19.0000001 C15.3398256,18.9989011 17.9357535,17.3935246 19.207402,14.8491466 C19.7314602,13.8116178 20.003034,12.6649729 20.0000034,11.5026073 L20.0015184,11.0550854 C19.7914965,7.24821579 16.7517842,4.20850354 13,4 L12.4973927,3.9999966 C11.3350271,3.996966 10.1883822,4.26853978 9.14705875,4.7945046 C6.60647541,6.06424654 5.00109895,8.66017444 4.9999966,11.5026073 C4.996966,12.6649729 5.26853978,13.8116178 5.79259803,14.8491466 C5.91280832,15.0871386 5.93299858,15.3632819 5.8486833,15.6162278 L4.58113883,19.4188612 Z M22,11.4987331 C22.0036397,12.9756442 21.6584766,14.432549 20.9945046,15.7470587 C19.3861648,18.965131 16.0979895,20.9986078 12.5026073,20.9999966 C11.1675361,21.0034775 9.84878241,20.7219325 8.63394863,20.1761097 L3.31622777,21.9486833 C2.53446974,22.2092693 1.79073069,21.4655303 2.0513167,20.6837722 L3.82388994,15.3660525 C3.2780673,14.1512376 2.99652219,12.8326774 3.00000007,11.499613 C3.00139217,7.90201054 5.03486902,4.6138352 8.24914664,3.00740197 C9.56784863,2.3413225 11.0252373,1.9961515 12.5,2 L13.0550854,2.00151835 C17.8798346,2.26769584 21.7323042,6.12016537 22,11 L22,11.4987331 Z" id="icon" fill="{{ section.settings.icon_color }}"></path>
+                  </g>
+              </svg>
+            </div>
+            <h4 class="mini-question-text" style="border-color: {{ section.settings.text_color }}">How long will it take to get my order?</h4>
+            <div class="plus-icon">
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0)" class="plus-icon-line-1" style="background-color: {{ section.settings.plus_color }}"></div>
+              <div class="plus-icon-line-2" style="background-color: {{ section.settings.plus_color }}"></div>
+            </div>
+          </div>
+          <div data-ix="new-interaction" style="display:none;height:0PX;opacity:1" class="mini-answer">
+            <div class="mini-answer-text" style="border-color: {{ section.settings.text_color }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit nunc id sagittis iaculis. Quisque tempor volutpat urna ac vehicula. Nam sagittis pharetra dignissim. Proin quis est velit. </div>
+          </div>
+        </div>
+
+      <div class="mini-faq-card e-faq-animate" style="border-color: {{ section.settings.border_color }}">
+          <div class="mini-question">
+            <div class="mini-question-icon">
+              <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle">
+                  <g id="Icons/message-circle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <path d="M4.58113883,19.4188612 L8.38377223,18.1513167 C8.63671809,18.0670014 8.91286142,18.0871917 9.15085336,18.207402 C10.1883822,18.7314602 11.3350271,19.003034 12.499613,19.0000001 C15.3398256,18.9989011 17.9357535,17.3935246 19.207402,14.8491466 C19.7314602,13.8116178 20.003034,12.6649729 20.0000034,11.5026073 L20.0015184,11.0550854 C19.7914965,7.24821579 16.7517842,4.20850354 13,4 L12.4973927,3.9999966 C11.3350271,3.996966 10.1883822,4.26853978 9.14705875,4.7945046 C6.60647541,6.06424654 5.00109895,8.66017444 4.9999966,11.5026073 C4.996966,12.6649729 5.26853978,13.8116178 5.79259803,14.8491466 C5.91280832,15.0871386 5.93299858,15.3632819 5.8486833,15.6162278 L4.58113883,19.4188612 Z M22,11.4987331 C22.0036397,12.9756442 21.6584766,14.432549 20.9945046,15.7470587 C19.3861648,18.965131 16.0979895,20.9986078 12.5026073,20.9999966 C11.1675361,21.0034775 9.84878241,20.7219325 8.63394863,20.1761097 L3.31622777,21.9486833 C2.53446974,22.2092693 1.79073069,21.4655303 2.0513167,20.6837722 L3.82388994,15.3660525 C3.2780673,14.1512376 2.99652219,12.8326774 3.00000007,11.499613 C3.00139217,7.90201054 5.03486902,4.6138352 8.24914664,3.00740197 C9.56784863,2.3413225 11.0252373,1.9961515 12.5,2 L13.0550854,2.00151835 C17.8798346,2.26769584 21.7323042,6.12016537 22,11 L22,11.4987331 Z" id="icon" fill="{{ section.settings.icon_color }}"></path>
+                  </g>
+              </svg>
+            </div>
+            <h4 class="mini-question-text" style="border-color: {{ section.settings.text_color }}">How can I track my order?</h4>
+            <div class="plus-icon">
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(90DEG) skew(0, 0)" class="plus-icon-line-1" style="background-color: {{ section.settings.plus_color }}"></div>
+              <div class="plus-icon-line-2" style="background-color: {{ section.settings.plus_color }}"></div>
+            </div>
+          </div>
+          <div data-ix="new-interaction" style="display:none;height:0PX;opacity:1" class="mini-answer">
+            <div class="mini-answer-text" style="border-color: {{ section.settings.text_color }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit nunc id sagittis iaculis. Quisque tempor volutpat urna ac vehicula. Nam sagittis pharetra dignissim. Proin quis est velit. </div>
+          </div>
+        </div>
+
+    {% else %}
+
+      {% for block in section.blocks %}
+      <div class="mini-faq-card e-faq-animate {{ section.settings.onscroll }}" style="border-color: {{ section.settings.border_color }}">
+        <div class="mini-question">
+          <div class="mini-question-icon">
+              <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle">
+                  <g id="Icons/message-circle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <path d="M4.58113883,19.4188612 L8.38377223,18.1513167 C8.63671809,18.0670014 8.91286142,18.0871917 9.15085336,18.207402 C10.1883822,18.7314602 11.3350271,19.003034 12.499613,19.0000001 C15.3398256,18.9989011 17.9357535,17.3935246 19.207402,14.8491466 C19.7314602,13.8116178 20.003034,12.6649729 20.0000034,11.5026073 L20.0015184,11.0550854 C19.7914965,7.24821579 16.7517842,4.20850354 13,4 L12.4973927,3.9999966 C11.3350271,3.996966 10.1883822,4.26853978 9.14705875,4.7945046 C6.60647541,6.06424654 5.00109895,8.66017444 4.9999966,11.5026073 C4.996966,12.6649729 5.26853978,13.8116178 5.79259803,14.8491466 C5.91280832,15.0871386 5.93299858,15.3632819 5.8486833,15.6162278 L4.58113883,19.4188612 Z M22,11.4987331 C22.0036397,12.9756442 21.6584766,14.432549 20.9945046,15.7470587 C19.3861648,18.965131 16.0979895,20.9986078 12.5026073,20.9999966 C11.1675361,21.0034775 9.84878241,20.7219325 8.63394863,20.1761097 L3.31622777,21.9486833 C2.53446974,22.2092693 1.79073069,21.4655303 2.0513167,20.6837722 L3.82388994,15.3660525 C3.2780673,14.1512376 2.99652219,12.8326774 3.00000007,11.499613 C3.00139217,7.90201054 5.03486902,4.6138352 8.24914664,3.00740197 C9.56784863,2.3413225 11.0252373,1.9961515 12.5,2 L13.0550854,2.00151835 C17.8798346,2.26769584 21.7323042,6.12016537 22,11 L22,11.4987331 Z" id="icon" fill="{{ section.settings.icon_color }}"></path>
+                  </g>
+              </svg>
+            </div>
+          <h4 class="mini-question-text" style="border-color: {{ section.settings.text_color }}">{{ block.settings.question }}</h4>
+          <div class="plus-icon">
+            <div class="plus-icon-line-1" style="background-color: {{ section.settings.plus_color }}"></div>
+            <div class="plus-icon-line-2" style="background-color: {{ section.settings.plus_color }}"></div>
+          </div>
+        </div>
+        <div class="mini-answer">
+          <div class="mini-answer-text" style="border-color: {{ section.settings.text_color }}">{{ block.settings.answer }}</div>
+        </div>
+      </div>
+      {% endfor %}
+
+    {% endif %}
+
+
+  </div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Faq",
+    "settings": [
+    {
+      "type": "paragraph",
+      "content": "Save content to enable dropdown animation"
+    },
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "color",
+            "id": "icon_color",
+            "label": "Icon color",
+      "default": "#ff6852"
+    },
+    {
+      "type": "color",
+            "id": "border_color",
+            "label": "Border color",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+            "id": "plus_color",
+            "label": "Plus icon color",
+      "default": "#222222"
+    },
+    {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        },
+    {
+      "type": "header",
+        "content": "Style section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+      {
+        "type": "question",
+        "name": "Question",
+    "settings":
+    [
+            {
+                "id": "question",
+                "type": "text",
+                "label": "Question"
+            },
+            {
+                "id": "answer",
+                "type": "textarea",
+                "label": "Answer"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Faq",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}

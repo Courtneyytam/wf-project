@@ -1,0 +1,18 @@
+.section-thumbnail-mini {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: 90%;
+}
+
+.highlightable-card:hover {
+  background-image: linear-gradient(
+    rgba(223, 227, 232, 0.3),
+    rgba(223, 227, 232, 0.3)
+  );
+}
+
+.highlightable-card {
+  margin-top: 0 !important;
+}

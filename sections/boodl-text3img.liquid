@@ -1,0 +1,144 @@
+<div class="flexcontainer {{section.settings.onscroll}} {{section.settings.layout}} t3icontpadding" style="background-color: {{section.settings.background_color}}; padding-top: {{section.settings.padding}}px;padding-bottom: {{section.settings.padding}}px">
+  <div class="container1third t3ipadding textalign{{section.settings.textalign}}">
+    <h1 style="font-weight: {{section.settings.weight}}">{{section.settings.titletext}}</h1>
+    <p>{{section.settings.content}}</p>
+  </div>
+  <div class="container2third flexcontainer">
+    <div class="flexcontainer flexcentercenter imgcover respsquare" style="background-image: {% if section.settings.img1 != blank%} url({{section.settings.img1 | img_url: 'master' }}); {%else%}url('https://www.boodl.xyz/images/kids.jpg'){% endif %}"></div>
+    <div class="flexcontainer flexcentercenter imgcover respsquare" style="background-image: {% if section.settings.img2 != blank%} url({{section.settings.img2 | img_url: 'master' }}); {%else%}url('https://www.boodl.xyz/images/street-sunset.jpg'){% endif %}"></div>
+    <div class="flexcontainer flexcentercenter imgcover respsquare" style="background-image: {% if section.settings.img3 != blank%} url({{section.settings.img3 | img_url: 'master' }}); {%else%}url('https://www.boodl.xyz/images/blue-flowers.jpg'){% endif %}"></div>
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Text and 3 images",
+    "settings": [
+        {
+            "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+            "default": "Boodl-ful"
+        },
+        {
+            "type": "textarea",
+            "id": "content",
+            "label": "Main Text",
+            "default": "Building beautiful shopify stores. Boodl will help your store will stand out among the sea of simple templates."
+        },
+        {
+            "id": "img1",
+            "type": "image_picker",
+            "label": "Image 1"
+        },
+    {
+            "id": "img2",
+            "type": "image_picker",
+            "label": "Image 2"
+        },
+    {
+            "id": "img3",
+            "type": "image_picker",
+            "label": "Image 3"
+        },
+    {
+            "type": "header",
+            "content": "Section styling"
+        },
+    {
+            "type": "select",
+            "id": "weight",
+            "label": "Heading font weight",
+            "default": "bold",
+            "options": [
+              {
+                "label": "Light",
+                "value": "lighter"
+              },
+              {
+                "label": "Medium",
+                "value": "normal"
+              },
+              {
+                "label": "Bold",
+                "value": "bold"
+              }
+            ]
+        },
+    {
+           "type": "select",
+           "id": "layout",
+           "options": [
+              { "value": "_row", "label": "Text on left"},
+              { "value": "_rowreverse", "label": "Text on right"}
+           ],
+          "label": "Section layout",
+          "default": "_row"
+        },
+    {
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       96,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   64
+      },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+        {
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Appear on scroll",
+          "default": ""
+        }
+  ],
+  "presets": [{
+    "name": "Simple text and images",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.t3ipadding{padding: 16px 32px;}
+.t3icontpadding{padding-left: 8%;padding-right: 8%;}
+.respsquare{
+  width: 33%;
+  margin: 16px;
+background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+}
+@media (max-width: 479px) {
+.t3icontpadding{padding-left: 24px;padding-right: 24px;}
+.t3ipadding{padding: 16px 0px;}
+.respsquare{
+  width: 100%;
+  margin: 16px 0px;
+}
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

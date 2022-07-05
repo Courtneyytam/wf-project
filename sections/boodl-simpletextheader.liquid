@@ -1,0 +1,183 @@
+<div class="sth-container {{section.settings.onscroll}}" id="_{{section.id}}">
+<style>
+  #_{{section.id}}.sth-container{
+    padding-top: {{section.settings.toppadding}}px;
+    padding-bottom: {{section.settings.bottompadding}}px;
+      background-color: {{section.settings.background_color}};
+  }
+  .lnd_title{
+    color: {{section.settings.titlecolor}};
+  }
+  .lnd_h3_02{
+    color: {{section.settings.headercolor}};
+  }
+  .lnd_paragraph_03{
+    color: {{section.settings.subheadercolor}};
+  }
+</style>
+<div class="lnd_title_wrap_02">
+  <p class="lnd_title">{{section.settings.titletext}}</p>
+  <h3 class="lnd_h3_02">{{section.settings.header}}</h3>
+  <p class="lnd_paragraph_03">{{section.settings.subheader}}</p>
+</div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Simple text header",
+    "settings": [
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+      "default": "FEATURED PRODUCTS"
+    },
+  {
+           "type": "color",
+           "id": "titlecolor",
+           "label": "Title color",
+           "default": "#8a94a6"
+        },
+  {
+      "type": "text",
+            "id": "header",
+            "label": "Section header",
+      "default": "Our Most Popular Products"
+    },
+  {
+           "type": "color",
+           "id": "headercolor",
+           "label": "Header color",
+           "default": "#0a1f44"
+        },
+  {
+      "type": "text",
+            "id": "subheader",
+            "label": "Section subheader",
+      "default": "From Brands You Love"
+    },
+  {
+           "type": "color",
+           "id": "subheadercolor",
+           "label": "Subheader color",
+           "default": "#000"
+        },
+  {
+          "type": "header",
+            "content": "Section Styling"
+        },
+  {
+      "type":   "range",
+      "id":     "toppadding",
+      "min":       8,
+      "max":       160,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Top padding",
+      "default":   80
+    },
+  {
+      "type":   "range",
+      "id":     "bottompadding",
+      "min":       8,
+      "max":       160,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Bottom padding",
+      "default":   32
+    },
+  {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#fff"
+        },
+  {
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Appear on scroll",
+          "default": ""
+        }
+  ],
+  "presets": [{
+    "name": "Simple text header",
+    "category": "Boodl: Title Headers"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.lnd_title {
+  max-width: 500px;
+  margin-right: auto;
+  margin-bottom: 4px;
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.lnd_title_wrap_02 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.lnd_h3_02 {
+  margin: 0px auto 10px;
+  font-size: 38px;
+  line-height: 42px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.lnd_paragraph_03 {
+  max-width: 500px;
+  margin-right: auto;
+  margin-bottom: 18px;
+  margin-left: auto;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .sth-container {
+      padding-top: 64px !important;
+      padding-bottom: 32px !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .sth-container {
+      padding-top: 48px !important;
+      padding-bottom: 24px !important;
+  }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

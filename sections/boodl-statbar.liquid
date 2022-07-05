@@ -1,0 +1,156 @@
+{% assign bgimg = section.settings.bgimg%}  
+
+<div class="section-7 skills-bg-section-1" >
+    <style>
+      .section-7{
+        padding-top:{{section.settings.padding}}px;
+        padding-bottom:{{section.settings.padding}}px;
+      }
+      .section-7.skills-bg-section-1{
+        {% if section.settings.parallax %}
+            background-attachment: scroll, fixed;
+        {% endif %}
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(17, 17, 17, 0.5)), to(rgba(17, 17, 17, 0.5))), url({% if bgimg == blank%}"https://www.boodl.xyz/images/mountain.jpg"{%else%}{{ bgimg | img_url: "master"}}{%endif%});
+      background-image: linear-gradient(180deg, rgba(17, 17, 17, 0.5), rgba(17, 17, 17, 0.5)), url({% if bgimg == blank%}"https://www.boodl.xyz/images/mountain.jpg"{%else%}{{ bgimg | img_url: "master"}}{%endif%});
+      }
+      .fact-divider{
+        background-color: {{section.settings.divider_color}};
+      }
+      .fact-header{
+        color: {{section.settings.text_color}};
+      }
+    </style>
+    <div class="wrapper-3">
+      <div class="facts">
+        <div class="fact-center" data-ix="slide-up-1">
+          <div class="fact-line-text">{{section.settings.stat_num1}}</div>
+          <div class="fact-divider"></div>
+          <h5 class="fact-header">{{section.settings.stat_title1}}</h5>
+        </div>
+        <div class="fact-center" data-ix="slide-up-2">
+          <div class="fact-line-text">{{section.settings.stat_num2}}</div>
+          <div class="fact-divider"></div>
+          <h5 class="fact-header">{{section.settings.stat_title2}}</h5>
+        </div>
+        <div class="fact-center" data-ix="slide-up-3">
+          <div class="fact-line-text">{{section.settings.stat_num3}}</div>
+          <div class="fact-divider"></div>
+          <h5 class="fact-header">{{section.settings.stat_title3}}</h5>
+        </div>
+        <div class="fact-center" data-ix="slide-up-4">
+          <div class="fact-line-text">{{section.settings.stat_num4}}</div>
+          <div class="fact-divider"></div>
+          <h5 class="fact-header">{{section.settings.stat_title4}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+{% schema %}
+  {
+    "name": "Stat bar",
+    "settings": [
+  {
+          "id": "bgimg",
+          "type": "image_picker",
+          "label": "Background image"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "parallax",
+      "label":     "Parallax effect",
+      "default":   true
+    },
+  {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#FFA34F"
+    },
+{
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#fff"
+    },
+  {   
+      "type":   "range",
+      "id":     "padding",
+      "min":       24,
+      "max":       120,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   80
+    },
+  {
+      "type": "header",
+      "content": "Stat 1"
+    },
+  {
+      "type": "text",
+      "id": "stat_num1",
+      "label": "Stat number",
+      "default": "132"
+    },
+  {
+      "type": "text",
+      "id": "stat_title1",
+      "label": "Stat title",
+      "default": "Distributers"
+    },
+  {
+      "type": "header",
+      "content": "Stat 2"
+    },
+  {
+      "type": "text",
+      "id": "stat_num2",
+      "label": "Stat number",
+      "default": "3.2M"
+    },
+  {
+      "type": "text",
+      "id": "stat_title2",
+      "label": "Stat title",
+      "default": "Impressions"
+    },
+  {
+      "type": "header",
+      "content": "Stat 3"
+    },
+  {
+      "type": "text",
+      "id": "stat_num3",
+      "label": "Stat number",
+      "default": "42k"
+    },
+  {
+      "type": "text",
+      "id": "stat_title3",
+      "label": "Stat title",
+      "default": "Happy customers"
+    },
+  {
+      "type": "header",
+      "content": "Stat 4"
+    },
+  {
+      "type": "text",
+      "id": "stat_num4",
+      "label": "Stat number",
+      "default": "48k"
+    },
+  {
+      "type": "text",
+      "id": "stat_title4",
+      "label": "Stat title",
+      "default": "Products sold"
+    }
+  
+  ],
+  "presets": [{
+    "name": "Stat bar",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,250 @@
+<style>
+
+  .intro-icon.home {
+    background-color: {{ section.settings.c_color1 }};
+    background-image: {% if section.settings.icon1 == blank %} url('https://www.boodl.xyz/images/tree1.svg' {% else %} url({{ section.settings.icon1 | img_url }} {% endif%});
+  }
+
+    .intro-icon.shop {
+      background-color: {{ section.settings.c_color2 }};
+      background-image: {% if section.settings.icon2 == blank %} url('https://www.boodl.xyz/images/tree2.svg' {% else %} url({{ section.settings.icon2 | img_url }} {% endif%});
+  }
+
+  .intro-icon.monitor {
+    background-color: {{ section.settings.c_color3 }};
+    background-image: {% if section.settings.icon3 == blank %}  url('https://www.boodl.xyz/images/tree3.svg' {% else %} url({{ section.settings.icon3 | img_url }} {% endif%} );
+  }
+  .titletext._1{ color: {{section.settings.t_color1}};}
+  .titletext._2{ color: {{section.settings.t_color2}};}
+  .titletext._3{ color: {{section.settings.t_color3}};}
+</style>
+
+<div id="Intro" class="content-section"  style="padding: {{ section.settings.padding }}px 5%; background-color: {{ section.settings.background_color }}">
+    <div class="content-wrapper-2 w-container {{ section.settings.onscroll }}">
+      <div class="center-box">
+        <div>{{ section.settings.header }}</div>
+          <div class="heading-box">
+            <h1>{{ section.settings.titletext }}</h1>
+          </div>
+      </div>
+      <div class="pillarcenter">
+        <div class="intro-vertical {{section.settings.cardstyle}}">
+              <div class="intro-icon home"></div>
+            <div class="expand">
+              <h4 class="titletext _1">{{ section.settings.heading1 }}</h4>
+              <p>{{ section.settings.desc1 }}</p>
+              <a href="{{section.settings.link_addr1}}" class="link-block-2 w-inline-block">
+                <div class="inline-block right-border">Learn more</div></a>
+            </div>
+        </div>
+        <div class="intro-vertical _2 {{section.settings.cardstyle}}">
+              <div class="intro-icon shop"></div>
+            <div class="expand">
+              <h4 class="titletext _2">{{ section.settings.heading2 }}</h4>
+              <p>{{ section.settings.desc2 }}</p>
+              <a href="{{section.settings.link_addr2}}" class="link-block-2 w-inline-block">
+                <div class="inline-block right-border">Learn more</div></a>
+            </div>
+        </div>
+        <div class="intro-vertical _3 {{section.settings.cardstyle}}">
+              <div class="intro-icon monitor"></div>
+            <div class="expand">
+              <h4 class="titletext _3">{{ section.settings.heading3 }}</h4>
+              <p>{{ section.settings.desc3 }}</p>
+              <a href="{{section.settings.link_addr1}}" class="link-block-2 w-inline-block">
+                <div class="inline-block right-border">Learn more</div></a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Three Pillars",
+    "settings": [
+  {
+        "type": "text",
+        "id": "header",
+        "label": "Header",
+        "default": "about us"
+  },
+  {
+        "type": "text",
+        "id": "titletext",
+        "label": "Title",
+        "default": "We are a creative team of designers"
+    },
+  {
+      "type": "header",
+      "content": "Pillar 1"
+    },
+  {
+      "type": "image_picker",
+      "id": "icon1",
+      "label": "Image"
+  },
+  {
+      "id": "c_color1",
+      "type": "color",
+      "label": "Circle color",
+      "default": "#F0F5FF"
+    },
+  {
+        "type": "text",
+        "id": "heading1",
+        "label": "Heading",
+        "default": "Who we are"
+    },
+  {
+      "id": "t_color1",
+      "type": "color",
+      "label": "Heading color",
+      "default": "#0D068B"
+    },
+    {
+        "type": "textarea",
+        "id": "desc1",
+        "label": "Description",
+        "default": "We create pixel perfect designs that looks always awesome."
+  },
+  {
+        "type": "url",
+        "id": "link_addr1",
+        "label": "Link URL"
+  },
+  {
+      "type": "header",
+      "content": "Pillar 2"
+    },
+  {
+      "type": "image_picker",
+      "id": "icon2",
+      "label": "Image"
+  },
+  {
+      "id": "c_color2",
+      "type": "color",
+      "label": "Circle color",
+      "default": "#F0F5FF"
+    },
+  {
+        "type": "text",
+        "id": "heading2",
+        "label": "Heading",
+        "default": "What we do"
+    },
+  {
+      "id": "t_color2",
+      "type": "color",
+      "label": "Heading color",
+      "default": "#0D068B"
+    },
+    {
+        "type": "textarea",
+        "id": "desc2",
+        "label": "Description",
+        "default": "We create pixel perfect designs that looks always awesome."
+  },
+  {
+        "type": "url",
+        "id": "link_addr2",
+        "label": "Link URL"
+  },
+  {
+      "type": "header",
+      "content": "Pillar 3"
+    },
+  {
+      "type": "image_picker",
+      "id": "icon3",
+      "label": "Image"
+  },
+  {
+      "id": "c_color3",
+      "type": "color",
+      "label": "Circle color",
+      "default": "#F0F5FF"
+    },
+  {
+        "type": "text",
+        "id": "heading3",
+        "label": "Heading",
+        "default": "Our Team"
+    },
+  {
+      "id": "t_color3",
+      "type": "color",
+      "label": "Heading color",
+      "default": "#0D068B"
+    },
+    {
+        "type": "textarea",
+        "id": "desc3",
+        "label": "Description",
+        "default": "We create pixel perfect designs that looks always awesome."
+  },
+  {
+        "type": "url",
+        "id": "link_addr3",
+        "label": "Link URL"
+  },
+  {
+        "type": "header",
+        "content": "Style Section"
+    },
+  {
+           "type": "select",
+           "id": "cardstyle",
+           "options": [
+        { "value": "outline", "label": "Outline"},
+              { "value": "shadow", "label": "Shadow"}
+           ],
+           "label": "Card style",
+      "default": "shadow"
+        },
+    {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+    },
+    {
+        "type":   "range",
+        "id":     "padding",
+        "min":       24,
+        "max":       80,
+        "step":      8,
+        "unit":      "px",
+        "label":     "Section padding",
+        "default":   40
+    },
+  {
+      "type": "header",
+        "content": "Animation section"
+    },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        }
+  ],
+  "presets": [{
+    "name": "3 Pillars",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

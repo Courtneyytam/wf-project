@@ -1,0 +1,169 @@
+<div class="hv-header-section w-background-video w-background-video-atom">
+ 
+  <div class="hv-header-block">
+    <div class="header-content-wrapper">
+      <div class="hv-content-wrapper">
+      <h1 class="heading-11">{{section.settings.heading}}</h1>
+      <div class="hv-p-main">{{section.settings.description}} {{section.settings.width}}</div>
+      <div class="header-buttons-wrapper hv" style="margin-bottom: 24px;">
+        {%if section.settings.btn1text != blank%}<a href="{{section.settings.btn1link}}" class="btn eightpxmargin hv-half">{{section.settings.btn1text}}</a>{%endif%}
+        {%if section.settings.btn2text != blank%}<a href="{{section.settings.btn2link}}" target="_blank" class="btn btn--secondary eightpxmargin hv-half" style="background-color: white;">{{section.settings.btn2text}}</a>{%endif%}
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--div class="vertical-lines-wrapper">
+    <div class="vertical-line"></div>
+    <div class="vertical-line"></div>
+    <div class="vertical-line"></div>
+  </div-->
+  
+  <div class="hv-overlay" style="background-color: rgba(0,0,0,{{section.settings.overlaystrength | divided_by: 100.0}});"></div>
+  <video autoplay="autoplay" 
+         loop="loop" 
+         style="background-image:url('{%if section.settings.placeholderimg != blank %}{{section.settings.placeholderimg | img_url: "master" }}{%else%}https://www.boodl.xyz/images/trees-and-birds.jpg{%endif%}');" 
+         muted="muted"
+         data-object-fit="cover">
+    <source src="{%if section.settings.video_link == blank%}https://www.boodl.xyz/images/testvid.mp4{%else%}{{ section.settings.video_link }}{%endif%}">  </video>
+</div>
+
+<div class="about-section-2">
+    <div id="Free-Quote" class="free-quote-form-wrapper-2" style="background-color: {{ settings.color_button }};">
+      <h6 class="hv-section-subtitle">{{section.settings.contacttitle}}</h6>
+      <div class="free-quote-form-block w-form">
+        {%- assign formId = 'ContactForm' -%}
+        {% form 'contact', id: formId %}
+        {% include 'form-status', form: form, form_id: formId %}
+        <form id="free-quote-form-main-page" name="email-form" data-name="Email Form">
+          <div class="w-layout-grid grid free-quote-form" style="margin: 0px;">
+            <input type="text" class="free-quote-form-text-field hv-single w-input" maxlength="256" name="contact[{{ 'contact.form.name' | t }}]" id="{{ formId }}-name" placeholder="{{ 'contact.form.name' | t }}" required="">
+            <input type="email" class="free-quote-form-text-field hv-single w-input" maxlength="256" name="contact[email]" id="{{ formId }}-email" 
+                   value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                   aria-required="true"
+                   {%- if form.errors contains 'email' -%}
+                     class="input--error"
+                     aria-invalid="true"
+                     aria-describedby="{{ formId }}-email-error"
+                   {%- endif -%}
+                   placeholder="{{ 'contact.form.email' | t }}" required="">
+            <input type="tel" class="free-quote-form-text-field hv-single w-input" maxlength="256" name="contact[{{ 'contact.form.phone' | t }}]" id="{{ formId }}-phone" placeholder="{{ 'contact.form.phone' | t }}" id="Phone" required="">
+            <input type="text" class="free-quote-form-text-field hv-subject w-input" maxlength="256" name="contact[{{ 'contact.form.message' | t }}]" id="{{ formId }}-message" placeholder="{{ 'contact.form.message' | t }}" id="Subject" required="">
+            <input type="submit" value="{%if section.settings.contactbutton != blank%}{{section.settings.contactbutton}}{%else%}Submit message{%endif%}" data-wait="Please wait..." class="hv-submit-button w-button">
+          </div>
+        </form>
+        {% if form.posted_successfully? %}
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        {% else %}
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+        {% endif %}
+        {%endform%}
+      </div>
+    </div>
+  </div>
+<style>
+  .heading-11 {
+    font-size: 88px;
+    margin: 0px !important; 
+  }
+  </style>
+{% schema %}
+  {
+    "name": "Hero Video",
+    "settings": [
+		{
+			"type": "header",
+   			"content": "Main content"
+		},
+		{
+          "type": "text",
+          "id":"heading",
+          "label": "Title",
+          "default": "Headline"
+        },
+		{
+          "type": "text",
+          "id":"description",
+          "label": "Description",
+          "default": "Short Description about your shopify site."
+        },
+		{
+			"type": "paragraph",
+   			"content": "To remove button, leave text field blank"
+		},
+		{
+          "type": "text",
+          "id":"btn1text",
+          "label": "Primary button text",
+          "default": "Contact"
+        },
+		{
+          "type": "url",
+          "id": "btn1link",
+          "label": "Primary button link"
+        },
+		{
+          "type": "text",
+          "id":"btn2text",
+          "label": "Secondary button text",
+          "default": "Explore more"
+        },
+		{
+          "type": "url",
+          "id": "btn2link",
+          "label": "Secondary button link"
+        },
+		{
+			"type": "header",
+   			"content": "Background"
+		},
+		{
+          "id": "placeholderimg",
+          "type": "image_picker",
+          "label": "Placeholder background image",
+			"info": "Add an image for when your video is loading."
+        },
+		{
+          "type": "url",
+          "id":"video_link",
+          "label": "Video file url",
+          "info": "Upload a video file under 'Settings > Files' and paste the URL here."
+        },
+		{
+			
+            "type":   "range",
+            "id":     "overlaystrength",
+            "min":       0,
+            "max":       90,
+            "step":      10,
+            "unit":      "%",
+            "label":     "Overlay amount",
+            "default":   40
+  		},
+		{
+			"type": "header",
+   			"content": "Contact Form"
+		},
+		{
+          "type": "text",
+          "id":"contacttitle",
+          "label": "Contact form title",
+          "default": "Let's Talk"
+        },
+		{
+          "type": "text",
+          "id":"contactbutton",
+          "label": "Contact form button text",
+          "default": "Submit message"
+        }
+	],
+	"presets": [{
+		"name": "Hero Video",
+		"category": "Boodl: Landing Pages"
+    }]
+  }
+{% endschema %}

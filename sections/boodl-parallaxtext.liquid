@@ -1,0 +1,179 @@
+<div class="parallax-section no-padding-vertical" style="background-color: {{ section.settings.bgcolor }}; ">
+  <div class="parallax-wrapper">
+    <div class="huge-promo-text" style="padding: {{ section.settings.padding }}px 0px;">
+      <div class="huge-text e-parallax">{{ section.settings.text }}<br></div>
+    	<style>
+          .huge-text{
+            color: {{ section.settings.textcolor }};
+            font-weight: {{ section.settings.weight }};
+            font-size: {{ section.settings.fontsize }}px;
+            font-family: "{{ section.settings.customfont.family | replace: '"', '' }}", {{ section.settings.customfont.fallback_families }};
+          }
+      	</style>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Parallax Text",
+    "settings": [
+		{
+          "id": "text",
+          "type": "text",
+          "label": "Text",
+          "default": "sustainable design"
+        },
+		{
+          "id": "textcolor",
+          "type": "color",
+          "label": "Text color",
+          "default": "#e0e0e0"
+        },
+		{
+           "type":    "font_picker",
+           "label":   "Font",
+           "id":      "customfont",
+           "default": "helvetica_n4"
+        },
+		{
+            "type": "select",
+            "id": "weight",
+            "label": "Font weight",
+            "default": "700",
+            "options": [
+              {
+                "label": "Light",
+                "value": "100"
+              },
+              {
+                "label": "Medium",
+                "value": "500"
+              },
+              {
+                "label": "Bold",
+                "value": "700"
+              }
+            ]
+        },
+		{
+
+            "type":   "range",
+            "id":     "fontsize",
+            "min":       80,
+            "max":       160,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Font size",
+            "default":   128
+  		},
+		{
+          "id": "bgcolor",
+          "type": "color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+		{
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   64
+  		}
+	],
+	"presets": [{
+		"name": "Parallax Text",
+		"category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.parallax-section {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0px 24px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.parallax-section.no-padding-vertical {
+  overflow: hidden;
+}
+
+.parallax-wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.huge-promo-text {
+  width: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.huge-text {
+	width: 3000px;
+}
+
+@media (max-width: 991px) {
+  .parallax-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .huge-text {
+    font-size: 80px !important;
+    line-height: 96px;
+  }
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

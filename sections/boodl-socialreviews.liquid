@@ -1,0 +1,159 @@
+<div data-section-id="{{ section.id }}" data-section-type="social-reviews" class="social-reviews">
+	<div class="container home-brands_head">
+	    <div class="tt-page__section-head--center text-center">
+	        <img class="star_top_img" src="{% if section.settings.star_img != blank%}{{ section.settings.star_img | img_url: 'master' }}{% else %}https://www.boodl.xyz/images/5stars.png{% endif %}">
+	        <h4 style="color: {{ section.settings.title_color }};">{{ section.settings.title }}</h4>
+	        <p style="color: {{ section.settings.small_title_color }};">{{ section.settings.small_title }}</p>
+	    </div>
+	</div>
+
+	<div class="tt-carousel-brands__wrap">
+
+		<div class="tt-carousel-brands">
+			{% if section.blocks.size > 0 %}
+
+				{%- for block in section.blocks -%}
+
+					<a class="card" {% if block.settings.review-url != blank %}href="{{ block.settings.review-url }}"{% else %} style="cursor:default;" {% endif %} >
+                      <div class="first_top">
+                        <div class="imgcover profilepic-sr" style="background-size: contain; background-image: {% if block.settings.profilepic != blank%} url({{block.settings.profilepic | img_url: 'master' }}); {%else%}url('https://www.boodl.xyz/images/avatar1.jpg'){% endif %}"></div>
+                        <div>
+                          <p class="customer_name">{{ block.settings.customers_name }}</p>
+                          <p class="customer_id">{{ block.settings.Customer_id }}</p>
+                        </div>
+                      </div>
+                      <p class="reviewtext-sr">{{ block.settings.des_txt }}</p>
+                      {% if block.settings.social-icon == "ig" %}<img class="insta_img" src="https://www.boodl.xyz/images/instagram-icon-black.svg">
+                      {% elsif block.settings.social-icon == "fb" %}<img class="insta_img" src="https://www.boodl.xyz/images/facebook-icon-black.svg">
+                      {% elsif block.settings.social-icon == "twitter" %}<img class="insta_img" src="https://www.boodl.xyz/images/twitter-icon-black.svg">
+                      {% else %}
+                      {% endif %}
+					</a>
+
+				{%- endfor -%}
+			{% else %}
+
+
+			{% endif %}
+		</div>
+	{% comment %}
+		{% if section.settings.arrows %}
+			<div class="tt-page__arrows tt-page__arrows--in-head1">
+				<span class="tt-page__arrows-prev"><i class="icon-left-open-2"></i></span>
+				<span class="tt-page__arrows-next"><i class="icon-right-open-2"></i></span>
+			</div>
+		{% endif %}
+	{% endcomment %}
+	</div>
+
+</div>
+
+{%- if section.blocks.size == 0 -%}
+	{% include 'no-blocks' %}
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Social Media Reviews",
+	"max_blocks": 50,
+	"settings": [
+	{
+		"label": "Image",
+		"id": "star_img",
+		"type": "image_picker",
+		"info": "Add an image above the title!"
+	},
+	{
+		"label": "Main Title",
+		"id": "title",
+		"type": "text",
+		"default": "Main Title"
+	},
+	{
+       "type": "color",
+       "id": "title_color",
+       "label": "Main Title Color",
+       "default": "#000"
+    },
+	{
+		"label": "Small Title",
+		"id": "small_title",
+		"type": "text",
+		"default": "Small Title"
+	},
+	{
+       "type": "color",
+       "id": "small_title_color",
+       "label": "Small Title Color",
+       "default": "#6B6B6B"
+    }
+	],
+	"blocks": [
+	{
+		"type": "review",
+		"name": "Review",
+		"settings": [
+		{
+			"label": "Link to Review",
+			"id": "review-url",
+			"type": "url",
+			"info": "Optional"
+		},
+		{
+			"label": "Profile Picture",
+			"id": "profilepic",
+			"type": "image_picker"
+		},
+		{
+			"label": "Customer Name",
+			"id": "customers_name",
+			"type": "text",
+			"default": "Customers Name"
+		},
+		{
+			"label": "Customer Review",
+			"id": "des_txt",
+			"type": "text",
+			"default": "Customer Review"
+		},
+		{
+			"label": "Social Media Handle",
+			"id": "Customer_id",
+			"type": "text",
+			"default": "@CustomerId"
+		},
+		{
+			"label": "Social Media Icon",
+			"id": "social-icon",
+			"type": "select",
+			"default": "ig",
+			"options": [
+			{
+				"value": "ig",
+				"label": "Instagram"
+			},
+			{
+				"value": "twitter",
+				"label": "Twitter"
+			},
+			{
+				"value": "fb",
+				"label": "Facebook"
+			},
+			{
+				"value": "",
+				"label": "None"
+			}
+			]
+		}
+	]
+	}
+],
+"presets": [
+	{
+		"name": "Social Media Reviews",
+		"category": "Boodl: Testimonials"
+	}
+]
+}
+{% endschema %}

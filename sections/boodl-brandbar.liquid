@@ -1,0 +1,167 @@
+<style>
+  .cttm-complogo{
+    max-height:180px;
+    max-width:{% if section.blocks.size <= 3%} 240px {% elsif section.blocks.size == 4 %}  200px {% else %} 160px {% endif %};
+    {% if section.blocks.size <= 3 and section.blocks.size > 0 %}
+    padding-left: 16px;
+    padding-right: 16px;
+    {%endif%}
+    height:auto;
+    width:auto;
+}
+  @media (max-width: 479px) {
+    .cttm-complogo{
+      max-width: 120px;
+    }
+  }
+</style>
+
+<div class="f-outer-container"  style="padding: {{ section.settings.padding }}px 0px; background-color: {{ section.settings.background_color }} ">
+  <div class="f-inner-container {{ section.settings.onscroll }}">
+      {% if section.settings.titletext != blank %}
+          <div class="text-center">
+            <h2 style="color: {{ section.settings.text_color }}; margin-bottom: 32px;">{{ section.settings.titletext | escape }}</h2>
+          </div>
+        {% endif %}
+      <div class="logoblock">
+      {% if section.blocks.size == 0 %}
+
+        <a href="#" class="cttm-logo w-inline-block {{ section.settings.hover }}">
+                <img class="cttm-complogo" src="https://www.boodl.xyz/images/adidas-logo.png" style="width: 160px;" alt="">
+            </a>
+        <a href="#" class="cttm-logo w-inline-block {{ section.settings.hover }}">
+                <img class="cttm-complogo" src="https://www.boodl.xyz/images/nike-logo.png" style="width: 160px;" alt="">
+            </a>
+        <a href="#" class="cttm-logo w-inline-block {{ section.settings.hover }}">
+                <img class="cttm-complogo" src="https://www.boodl.xyz/images/reebok-logo.png" style="width: 160px;" alt="">
+            </a>
+          <a href="#" class="cttm-logo w-inline-block {{ section.settings.hover }}">
+                <img class="cttm-complogo" src="https://www.boodl.xyz/images/converse-logo.png" style="width: 160px;" alt="">
+            </a>
+          <a href="#" class="cttm-logo w-inline-block {{ section.settings.hover }}">
+                <img class="cttm-complogo" src="https://www.boodl.xyz/images/puma-logo.png" style="width: 160px;" alt="">
+            </a>
+
+      {% else %}
+
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.logolink }}" class="cttm-logo w-inline-block {{ section.settings.hover }}">
+              {% if block.settings.logoimg != blank %}
+                <img class="cttm-complogo" src="{{ block.settings.logoimg | img_url: 'x180' }}" alt="">
+              {% else %}
+                <img class="cttm-complogo" src="https://www.boodl.xyz/images/nike-logo.png" alt="">
+              {% endif %}
+            </a>
+    {% endfor %}
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Brands Bar",
+  "max_blocks": 5,
+    "settings":
+  [
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+      "default": "Our Partners"
+    },
+    {
+           "type": "color",
+           "id": "text_color",
+           "label": "Header color",
+           "default": "#000"
+        },
+    {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        },
+    {
+           "type": "select",
+           "id": "hover",
+           "options": [
+        { "value": "", "label": "None"},
+              { "value": "e-bounce", "label": "Bounce"},
+              { "value": "e-scale-effect", "label": "Scale"}
+           ],
+           "label": "Hover",
+      "default": "e-scale-effect"
+        },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+      {
+        "type": "logo",
+        "name": "Brand Logo",
+    "settings":
+    [
+            {
+                "id": "logolink",
+                "type": "url",
+                "label": "Logo link"
+            },
+            {
+                "id": "logoimg",
+                "type": "image_picker",
+                "label": "Logo image"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Brands Bar",
+    "category": "Boodl: Brands & Icons"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.logoblock{}
+.f-outer-container{margin-left: 2%; margin-right: 2%;}
+.f-inner-container{text-align: center;}
+.cttm-logo {padding: 16px 20px;}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

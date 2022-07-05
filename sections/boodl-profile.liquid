@@ -1,0 +1,160 @@
+  <div class="section-7 w-container" style="background-color: {{section.settings.background_color}}; padding-top: {{section.settings.padding}}px;padding-bottom: {{section.settings.padding}}px">
+    <div class="wrapper-3">
+      <div class="side-frame flexcontainer {{section.settings.layout}}">
+        <div class="side-feature-media {{section.settings.onscrollimg}}">
+          <div class="frame-2 reversed">
+            <style>
+              .side-frame{
+              	{% if section.settings.layout == '_row' %}
+                	margin-left: 6%;
+                {% else %}
+                	margin-right: 6%;
+                {% endif %}
+              }
+              .frame-2{
+              	box-shadow: inset 0 0 0 8px {{section.settings.frame_color}};
+              }
+              @media (max-width: 991px) {
+                .side-frame{margin-right: 0%;margin-left: 0%;}
+                .frame-2{
+                  box-shadow: inset 0 0 0 6px {{section.settings.frame_color}};
+                }
+              }
+              @media (max-width: 767px) {
+                .side-frame{margin-right: 0%;margin-left: 0%;}
+              }
+              </style>
+            <img src="{% if section.settings.profilepic == blank %}https://www.boodl.xyz/images/profile-male.jpg{%else%}{{ section.settings.profilepic | img_url: "master"}}{%endif%}" sizes="(max-width: 479px) 100vw, (max-width: 991px) 43vw, 35vw" alt="" class="frame-image reversed">
+          </div>
+        </div>
+        <div class="side-content-small {{section.settings.onscrolltext}}">
+          <h2 class="section-header">{{section.settings.titletext}}</h2>
+          <p class="section-description">{{section.settings.content}}</p>
+          {% if section.settings.showsignature %}
+          <img src="{% if section.settings.signature == blank %}https://www.boodl.xyz/images/signature.png{% else %}{{section.settings.signature | img_url: "master"}}{%endif%}" width="175" alt="">
+          {%endif%}
+          <div class="signature-text">{{section.settings.signature_text}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Profile",
+    "settings": [
+	{
+		"type": "text",
+        "id": "titletext",
+        "label": "Title",
+        "default": "Boodl's Vision"
+	},
+	{
+        "type": "textarea",
+        "id": "content",
+        "label": "Main Text",
+        "default": "If you end your training now, if you choose the quick and easy path, as Vader did, you will become an agent of evil. Our ships have completed their scan of the area and found nothing. If the Millennium Falcon went into light-speed, it'll be on the other side."
+    },
+    {
+        "id": "profilepic",
+        "type": "image_picker",
+        "label": "Profile Picture"
+    },
+	{
+		"id": "showsignature",
+		"type": "checkbox",
+		"label": "Show signature",
+		"default": true
+	},
+    {
+        "id": "signature",
+        "type": "image_picker",
+        "label": "Signature"
+    },
+	{
+		"type": "text",
+        "id": "signature_text",
+        "label": "Signature name",
+        "default": "— CEO of Boodl"
+	},
+	{
+        "type": "header",
+        "content": "Section styling"
+    },
+	{
+      "type": "color",
+      "id": "frame_color",
+      "label": "Frame color",
+      "default": "#FFA34F"
+    },
+	{
+      "type": "select",
+      "id": "layout",
+      "options": [
+      	{ "value": "_row", "label": "Text on right"},
+      	{ "value": "_rowreverse", "label": "Text on left"}
+      ],
+      "label": "Section layout",
+      "default": "_row"
+    },
+	{
+      "type":   "range",
+      "id":     "padding",
+      "min":       24,
+      "max":       96,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   64
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+	{
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscrollimg",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Image appear on scroll",
+          "default": "e-scroll-in-left"
+        },
+		{
+           "type": "select",
+           "id": "onscrolltext",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Text appear on scroll",
+          "default": ""
+        }
+	],
+	"presets": [{
+		"name": "Profile",
+		"category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,244 @@
+  <div id="Hero" class="hero-section hero-split-section">
+    <div data-ix="slide-right" class="hero-split-content">
+      <h1><span style="color: {{section.settings.colorfortitle}};">{{ section.settings.colortitle }}</span>&nbsp;{{ section.settings.titletext }}</h1>
+      <p class="hero-split-text">{{ section.settings.content }}</p>
+      <div class="vertical-scroll w-inline-block">
+        <div class="vertical-scroll-text">Scroll</div>
+        <img src="https://www.boodl.xyz/images/arrow-down.svg" data-ix="hero-scroll-arrow" alt="">
+      </div>
+      {% if section.settings.button %}
+        <a href="{{ section.settings.buttonlink}}" class="hero1-btn">
+          <button class="btn hero1-btncolor">{{ section.settings.buttontext }}</button>
+        </a>
+
+        <style>
+        .hero1-btn {
+          margin-top: {{ section.settings.space }}px;
+        }
+        .hero1-btncolor {
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+            {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+        }
+        .hero1-btncolor:hover{
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+            {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+        }
+    </style>
+
+      {% endif %}
+      <div class="social-icons hero-split-icons">
+        {% if section.settings.check_twitter %}
+        <a href="{{section.settings.twitter}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/twitter-icon-black.svg" alt="twitter icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/twitter-icon-color.svg" alt="twitter icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+        {% if section.settings.check_facebook %}
+        <a href="{{section.settings.facebook}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/facebook-icon-black.svg" alt="facebook icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/facebook-icon-color.svg" alt="facebook icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+        {% if section.settings.check_instagram %}
+        <a href="{{section.settings.instagram}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/instagram-icon-black.svg" alt="instagram icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/instagram-icon-color.svg" alt="instagram icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+        {% if section.settings.check_youtube %}
+        <a href="{{section.settings.youtube}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/youtube-icon-black.svg" alt="youtube icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/youtube-icon-color.svg" alt="youtube icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+        {% if section.settings.check_linkedin %}
+        <a href="{{section.settings.linkedin}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/linkedin-icon-black.svg" alt="linkedin icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/linkedin-icon-color.svg" alt="linkedin icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+        {% if section.settings.check_behance %}
+        <a href="{{section.settings.behance}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/behance-icon-black.svg" alt="behance icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/behance-icon-color.svg" alt="behance icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+        {% if section.settings.check_dribbble %}
+        <a href="{{section.settings.dribbble}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block">
+          <img src="https://www.boodl.xyz/images/dribbble-icon-black.svg" alt="dribbble icon" class="social-icon">
+          <img src="https://www.boodl.xyz/images/dribbble-icon-color.svg" alt="dribbble icon" class="social-icon-hover">
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div data-ix="slide-left" class="hero-split-image" style="background-image: url({% if section.settings.img == blank%}'https://www.boodl.xyz/images/modern-design.jpg'{%else%}{{section.settings.img | img_url:'master'}}{%endif%});"></div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Hero 1",
+    "settings": [
+  {
+      "id": "img",
+      "type": "image_picker",
+      "label": "Image"
+    },
+    {
+      "id": "colortitle",
+      "type": "text",
+      "label": "Colored title",
+    "default": "Uno"
+    },
+  {
+      "id": "colorfortitle",
+      "type": "color",
+      "label": "Text color",
+      "default": "#FFA34F"
+    },
+  {
+      "id": "titletext",
+      "type": "text",
+      "label": "Title",
+    "default": "Agency. Creative UI Kit Template"
+    },
+  {
+      "type": "textarea",
+      "id": "content",
+      "label": "Main Text",
+      "default": "Our ships have completed their scan of the area and found nothing. If the Millennium Falcon went into light-speed."
+    },
+    {
+      "type": "header",
+      "content": "Call to Action Button"
+    },
+    {
+      "type":      "checkbox",
+      "id":        "button",
+      "label":     "Include Call to Action",
+      "default":   true
+    },
+  {
+      "id": "buttontext",
+      "type": "text",
+      "label": "Colored title",
+    "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "buttonlink",
+      "label": "Button Link"
+    },
+  {
+      "id": "btn_color",
+      "type": "color",
+      "label": "Button color"
+    },
+    {
+      "id": "btntext_color",
+      "type": "color",
+      "label": "Button Text color"
+    },
+    {
+      "type":   "range",
+      "id":     "space",
+      "min":       16,
+      "max":       96,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Space between text and button",
+      "default":   24
+    },
+  {
+      "type": "header",
+      "content": "Social media"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_twitter",
+      "label":     "Show Twitter icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "twitter",
+      "label": "Twitter"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_facebook",
+      "label":     "Show Facebook icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "facebook",
+      "label": "Facebook"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_instagram",
+      "label":     "Show Instagram icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_youtube",
+      "label":     "Show Youtube icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "youtube",
+      "label": "Youtube"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_linkedin",
+      "label":     "Show Linkedin icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "linkedin",
+      "label": "Linkedin"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_behance",
+      "label":     "Show Behance icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "behance",
+      "label": "Behance"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_dribbble",
+      "label":     "Show Dribbble icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "dribbble",
+      "label": "Dribbble"
+    }
+  ],
+  "presets": [{
+    "name": "Hero 1",
+    "category": "Boodl: Landing Pages"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

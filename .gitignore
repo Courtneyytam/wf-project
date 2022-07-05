@@ -1,0 +1,6 @@
+.bin
+*.env
+ngrok.exe
+node_modules
+.next
+*.swp

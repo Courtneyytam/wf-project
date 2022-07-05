@@ -1,0 +1,245 @@
+<div class="section-8 no-padding-bottom" style="background-color: {{section.settings.background_color}};">
+    <div class="ns-wrapper-6">
+      <div class="engage">
+        <div class="engage-newsletter">
+          <h3 class="engage-heading">{{section.settings.heading}}</h3>
+          {%- assign formId = 'Contact_' | append: section.id -%}
+    	{% form 'customer', id: formId %}
+          <div class="engage-form-block w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="join-form">
+              <input type="email"
+                    name="contact[email]"
+                    id="{{ formId }}-email"
+                    class="input-3 join-first-input input-group__field{% if form.errors %} input--error{% endif %}"
+                    value="{{ form.email }}"
+                    placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                    aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    {% if form.errors %}
+                      aria-invalid="true"
+                      aria-describedby="{{ formId }}-email-error"
+                      data-form-status
+                    {% endif %}
+                    >
+              <div class="flexcontainer">
+                <input type="text"
+                    name="contact[name]"
+                    id="{{ formId }}-name"
+                    class="input-3 join-second-input"
+                    value="{{ form.name }}"
+                    placeholder="Name"
+                    aria-label="Name"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    >
+              <input type="submit" value=" " data-wait="Please wait..." class="button-9 send-icon-button btn {%if section.settings.accentcolor != blank%}ns_accent_color {%endif%}" style="background-image: url('https://www.boodl.xyz/images/paperplane-icon-white.svg');">
+              </div>
+              {% if section.settings.privacypolicy %}
+              <div class="form-text-small">{{section.settings.privacytext}}&nbsp;<a href="{{section.settings.pplink}}" class="link-white">{{section.settings.pptext}}</a></div>
+            	{%endif%}
+            </form>
+            <div class="w-form-done">
+              <div>{{ 'general.newsletter_form.confirmation' | t }}</div>
+            </div>
+            <div class="w-form-fail">
+              <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+          </div>
+          {%endform%}
+          <img id="ns-plane" src="https://www.boodl.xyz/images/contact-icon.svg" class="paperplane-icon e-ns-plane">
+        </div>
+        <div class="engage-social"><img src="https://www.boodl.xyz/images/communication.svg" alt="">
+          <h6 class="engage-social-heading">{{section.settings.community}}</h6>
+          <div class="social-buttons">
+            {%if section.settings.twitter %}
+            <a href="{{section.settings.twitterlink}}" target="_blank" class="social-button w-inline-block">
+              <img src="https://www.boodl.xyz/images/twitter-icon-white.svg" alt="">
+            </a>
+            {%endif%}
+            {%if section.settings.facebook %}
+            <a href="{{section.settings.facebooklink}}" target="_blank" class="social-button w-inline-block">
+              <img src="https://www.boodl.xyz/images/facebook-icon-white.svg" alt="">
+            </a>
+            {%endif%}
+            {%if section.settings.instagram %}
+            <a href="{{section.settings.instagramlink}}" target="_blank" class="social-button w-inline-block">
+              <img src="https://www.boodl.xyz/images/instagram-icon-white.svg" alt="">
+            </a>
+            {%endif%}
+            {%if section.settings.pinterest %}
+            <a href="{{section.settings.pinterestlink}}" target="_blank" class="social-button w-inline-block">
+              <img src="https://www.boodl.xyz/images/pinterest-icon-white.svg" alt="">
+            </a>
+            {%endif%}
+            {%if section.settings.behance %}
+            <a href="{{section.settings.behancelink}}" target="_blank" class="social-button w-inline-block">
+              <img src="https://www.boodl.xyz/images/behance-icon-white.svg" alt="">
+            </a>
+            {%endif%}
+            {%if section.settings.dribbble %}
+            <a href="{{section.settings.dribbblelink}}" target="_blank" class="social-button w-inline-block">
+              <img src="https://www.boodl.xyz/images/dribbble-icon-white.svg" alt="">
+            </a>
+            {%endif%}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <style>
+    .ns_accent_color{
+      background-color: {{section.settings.accentcolor}};
+    }
+    .ns_accent_color:hover{
+      background-color: {{section.settings.accentcolor | color_darken: 10 }} !important;
+    }
+    .social-button:hover {
+      border-color: transparent;
+      {%if section.settings.accentcolor != blank%}
+     	background-color: {{section.settings.accentcolor}};
+      {%else%}
+      background-color: {{ settings.color_button }};
+      {%endif%}
+    }
+    
+  </style>
+  </div>
+
+{% schema %}
+  {
+    "name": "Newsletter Subscription",
+    "settings": [
+		{
+          "type": "text",
+          "id":"heading",
+          "label": "Title",
+          "default": "Join Our Design Newsletter"
+        },
+		{	
+			"type": "color",
+			"id": "background_color",
+			"default": "#151515",
+			"label": "Background color"
+		},
+		{
+           "type": "color",
+           "id": "accentcolor",
+           "label": "Accent color"
+        },
+		{
+			"type": "checkbox",
+			"id": "privacypolicy",
+			"label": "Show privacy policy link",
+			"default": true
+		},
+		{
+          "type": "text",
+          "id": "privacytext",
+          "label": "Privacy text",
+          "default": "We never share your info. View our"
+        },
+		{
+          "type": "text",
+          "id": "pptext",
+          "label": "Privacy policy link text",
+          "default": "Privacy Policy"
+        },
+		{
+			"type": "url",
+            "id": "pplink",
+            "label": "Privacy policy link"
+		},
+		{
+            "type": "header",
+            "content": "Social Media"
+        },
+		{
+          "type": "text",
+          "id":"community",
+          "label": "Social media title",
+          "default": "Join Our Amazing Community"
+        },
+		{
+			"type": "checkbox",
+			"id": "twitter",
+			"label": "Twitter",
+			"default": true
+		},
+		{
+			"type": "url",
+            "id": "twitterlink",
+            "label": "Twitter link"
+		},
+		{
+			"type": "checkbox",
+			"id": "facebook",
+			"label": "Facebook",
+			"default": true
+		},
+		{
+			"type": "url",
+            "id": "facebooklink",
+            "label": "Facebook link"
+		},
+		{
+			"type": "checkbox",
+			"id": "instagram",
+			"label": "Instagram",
+			"default": true
+		},
+		{
+			"type": "url",
+            "id": "instagramlink",
+            "label": "Instagram link"
+		},
+		{
+			"type": "checkbox",
+			"id": "pinterest",
+			"label": "Pinterest",
+			"default": true
+		},
+		{
+			"type": "url",
+            "id": "pinterestlink",
+            "label": "Pinterest link"
+		},
+		{
+			"type": "checkbox",
+			"id": "behance",
+			"label": "Behance",
+			"default": true
+		},
+		{
+			"type": "url",
+            "id": "behancelink",
+            "label": "Behance link"
+		},
+		{
+			"type": "checkbox",
+			"id": "dribbble",
+			"label": "Dribbble",
+			"default": true
+		},
+		{
+			"type": "url",
+            "id": "dribbblelink",
+            "label": "Dribbble link"
+		}
+		
+	],
+	"presets": [{
+		"name": "Newsletter Subscription",
+		"category": "Boodl: Social & Reach"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

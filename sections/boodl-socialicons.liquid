@@ -1,0 +1,228 @@
+<div class="flexcontainer socialmedia-bar {{section.settings.onscroll}}">
+  <style>
+    .socialmedia-bar{
+      background-color: {{ section.settings.background_color }};
+      justify-content: {{section.settings.flex}};
+      padding: {{section.settings.toppadding}}px 8%;
+    }
+    .social-icon-container._component {
+      border: 1px solid {{section.settings.linecolor}};
+    }
+    @media (max-width: 700px) {
+    .socialmedia-bar{
+      justify-content: center;
+      padding-left: 8%;
+      padding-right: 8%;
+    }
+    }
+  </style>
+<div class="social-icons">
+  {% if section.settings.check_twitter %}
+  <a href="{{section.settings.twitter}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block _component">
+    <img src="https://www.boodl.xyz/images/twitter-icon-black.svg" alt="twitter icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/twitter-icon-color.svg" alt="twitter icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+  {% if section.settings.check_facebook %}
+  <a href="{{section.settings.facebook}}" data-ix="social-icon" target="_blank" class="social-icon-container _component w-inline-block">
+    <img src="https://www.boodl.xyz/images/facebook-icon-black.svg" alt="facebook icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/facebook-icon-color.svg" alt="facebook icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+  {% if section.settings.check_instagram %}
+  <a href="{{section.settings.instagram}}" data-ix="social-icon" target="_blank" class="social-icon-container _component w-inline-block">
+    <img src="https://www.boodl.xyz/images/instagram-icon-black.svg" alt="instagram icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/instagram-icon-color.svg" alt="instagram icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+  {% if section.settings.check_youtube %}
+  <a href="{{section.settings.youtube}}" data-ix="social-icon" target="_blank" class="social-icon-container _component w-inline-block">
+    <img src="https://www.boodl.xyz/images/youtube-icon-black.svg" alt="youtube icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/youtube-icon-color.svg" alt="youtube icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+  {% if section.settings.check_linkedin %}
+  <a href="{{section.settings.linkedin}}" data-ix="social-icon" target="_blank" class="social-icon-container w-inline-block _component">
+    <img src="https://www.boodl.xyz/images/linkedin-icon-black.svg" alt="linkedin icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/linkedin-icon-color.svg" alt="linkedin icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+  {% if section.settings.check_behance %}
+  <a href="{{section.settings.behance}}" data-ix="social-icon" target="_blank" class="social-icon-container  _component w-inline-block">
+    <img src="https://www.boodl.xyz/images/behance-icon-black.svg" alt="behance icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/behance-icon-color.svg" alt="behance icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+  {% if section.settings.check_dribbble %}
+  <a href="{{section.settings.dribbble}}" data-ix="social-icon" target="_blank" class="social-icon-container _component w-inline-block">
+    <img src="https://www.boodl.xyz/images/dribbble-icon-black.svg" alt="dribbble icon" class="social-icon">
+    <img src="https://www.boodl.xyz/images/dribbble-icon-color.svg" alt="dribbble icon" class="social-icon-hover">
+  </a>
+  {% endif %}
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Social media icons",
+    "settings": [
+  {
+      "type": "header",
+      "content": "Section styling"
+    },
+  {
+      "type": "select",
+      "id": "flex",
+      "label": "Content alignment",
+      "default": "flex-start",
+      "options": [
+        {
+          "label": "Left",
+          "value": "flex-start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "flex-end"
+        }
+      ]
+    },
+    {
+      "type":   "range",
+      "id":     "toppadding",
+      "min":       24,
+      "max":       96,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   64
+    },
+  {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+  {
+      "type": "color",
+      "id": "linecolor",
+      "label": "Line color",
+      "default": "#e4e4e4"
+    },
+  {
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Appear on scroll",
+          "default": ""
+        },
+  {
+      "type": "header",
+      "content": "Social items"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_twitter",
+      "label":     "Show Twitter icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "twitter",
+      "label": "Twitter"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_facebook",
+      "label":     "Show Facebook icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "facebook",
+      "label": "Facebook"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_instagram",
+      "label":     "Show Instagram icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_youtube",
+      "label":     "Show Youtube icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "youtube",
+      "label": "Youtube"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_linkedin",
+      "label":     "Show Linkedin icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "linkedin",
+      "label": "Linkedin"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_behance",
+      "label":     "Show Behance icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "behance",
+      "label": "Behance"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "check_dribbble",
+      "label":     "Show Dribbble icon",
+      "default":   true
+    },
+  {
+      "type": "url",
+      "id": "dribbble",
+      "label": "Dribbble"
+    }
+  ],
+  "presets": [{
+    "name": "Social media icons",
+    "category": "Boodl: Social & Reach"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

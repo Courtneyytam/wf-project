@@ -1,0 +1,376 @@
+{% assign overlayopacity = section.settings.overlayopacity | divided_by: 100.0 %}
+{% assign overlaycolor = section.settings.overlaycolor %}
+{% assign dividedwidth = 100 | divided_by: section.settings.cardsperrow %}
+{% assign width = dividedwidth | times: 0.80 %}
+{% if section.settings.aspectratio == 'square' %}
+  {% assign height = width %}
+{% elsif section.settings.aspectratio == '4by3' %}
+  {% assign height = width | divided_by: 4 | times: 3 %}
+{% elsif section.settings.aspectratio == '5by3' %}
+  {% assign height = width | divided_by: 5 | times: 3 %}
+{% elsif section.settings.aspectratio == '7by3' %}
+  {% assign height = width | divided_by: 7 | times: 3 %}
+{% elsif section.settings.aspectratio == '3by4' %}
+  {% assign height = width | divided_by: 3 | times: 4 %}
+{% elsif section.settings.aspectratio == '4by5' %}
+  {% assign height = width | divided_by: 4 | times: 5 %}
+{% elsif section.settings.aspectratio == '9by16' %}
+  {% assign height = width | divided_by: 9 | times: 16 %}
+{% else %}
+  {% assign height = width | divided_by: 3 | times: 5 %}
+{% endif %}
+
+<style>
+  .linkcard-cont{
+    width: {{ width }}vw;
+    height:{{ height }}vw;
+    align-items: {{ section.settings.textValign }};
+    border-radius: {{ section.settings.radius }}px;
+    margin: {{ section.settings.spacing | divided_by: 2 }}px;
+
+  }
+  .linkcard-overlay{
+    background-color:{{ overlaycolor | color_modify: 'alpha', overlayopacity }};
+  }
+  .linkcardtextstyle{
+        color: {{ section.settings.cardtextcolor }};
+        font-weight: {{ section.settings.weight }};
+        font-size: {{ section.settings.fontsize }}px;
+        font-family: "{{ section.settings.customfont.family | replace: '"', '' }}", {{ section.settings.customfont.fallback_families }};
+      }
+  @media (max-width: 767px) {
+  .linkcard-cont{
+    width: 90vw;
+        {% if section.settings.aspectratio == 'square' %}
+           height:90vw;
+        {% elsif section.settings.aspectratio == '4by3' %}
+           height:67vw;
+        {% elsif section.settings.aspectratio == '5by3' %}
+           height:54vw;
+        {% elsif section.settings.aspectratio == '7by3' %}
+           height:38vw;
+        {% elsif section.settings.aspectratio == '3by4' %}
+           height:120vw;
+        {% elsif section.settings.aspectratio == '4by5' %}
+           height:112vw;
+        {% elsif section.settings.aspectratio == '9by16' %}
+           height:160vw;
+        {% else %}
+           height:150vw;
+        {% endif %}
+  }
+}
+</style>
+
+<div class="" style="padding: {{ section.settings.padding }}px 0px; background-color: {{ section.settings.background_color }} ">
+  <div class="linkcards-cont {{ section.settings.onscroll }}">
+    {% if section.blocks.size == 0 %}
+      <div class="linkcard-cont">
+    <div class="cardtext" style="text-align: {{ section.settings.textHalign }}">
+      <p class="linkcardtextstyle">Your text goes here</p>
+    </div>
+    <div class="linkcard-overlay _block{{forloop.index}}" style=""></div>
+    <div class="linkcard-bgimg" style=" background-image:url('https://www.boodl.xyz/images/trees-and-birds.jpg')">
+    </div>
+  </div>
+    <div class="linkcard-cont">
+    <div class="cardtext" style="text-align: {{ section.settings.textHalign }}">
+      <p class="linkcardtextstyle">Customize the text using the settings panel</p>
+    </div>
+    <div class="linkcard-overlay _block{{forloop.index}}" style=""></div>
+    <div class="linkcard-bgimg" style=" background-image:url('https://www.boodl.xyz/images/desert.jpg')">
+    </div>
+  </div>
+    <div class="linkcard-cont">
+    <div class="cardtext" style="text-align: {{ section.settings.textHalign }}">
+      <p class="linkcardtextstyle">Add more cards using the add image card button</p>
+    </div>
+    <div class="linkcard-overlay _block{{forloop.index}}" style=""></div>
+    <div class="linkcard-bgimg" style=" background-image:url('https://www.boodl.xyz/images/mountain.jpg')">
+    </div>
+  </div>
+    {%else%}
+
+  {% for block in section.blocks %}
+    {% assign cardimg = block.settings.cardimg %}
+  {% if block.settings.cardlink != blank %}<a href="{{ block.settings.cardlink }}" class="cardlink">{% endif %}
+  <div class="linkcard-cont">
+    <div class="cardtext" style="text-align: {{ section.settings.textHalign }}">
+      <p class="linkcardtextstyle">{{ block.settings.cardtext }}</p>
+    </div>
+    <div class="linkcard-overlay _block{{forloop.index}}" style=""></div>
+    <div class="linkcard-bgimg" style="{% if block.settings.cardimg != blank %}background-image:url({{ cardimg | img_url: 'master'}}){% else %} background-image:url('https://www.boodl.xyz/images/trees-and-birds.jpg') {% endif %}">
+    </div>
+  </div>
+  {% if block.settings.cardlink != blank %}</a>{% endif %}
+    <style>
+        {% if block.settings.cardlink != blank %}
+      .linkcard-cont:hover > .linkcard-overlay._block{{forloop.index}}{
+    {% assign cardoverlaynew = overlayopacity | plus: 0.1 %}
+    background-color:{{ overlaycolor | color_modify: 'alpha', cardoverlaynew }};
+  }
+  {% endif %}
+    </style>
+  {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Image link cards",
+    "settings": [
+    {
+            "type":   "range",
+            "id":     "cardsperrow",
+            "min":       1,
+            "max":       5,
+            "step":      1,
+            "label":     "Cards per row",
+            "default":   3
+      },
+    {
+            "type": "header",
+            "content": "Card styling"
+        },
+    {
+            "type": "select",
+            "id": "aspectratio",
+            "label": "Aspect ratio",
+            "default": "square",
+            "options": [
+              {
+                "label": "Square",
+                "value": "square"
+              },
+              {
+                "label": "4:3",
+                "value": "4by3"
+              },
+              {
+                "label": "5:3",
+                "value": "5by3"
+              },
+        {
+                "label": "7:3",
+                "value": "7by3"
+              },
+        {
+                "label": "4:5",
+                "value": "4by5"
+              },
+        {
+                "label": "9:16",
+                "value": "9by16"
+              },
+        {
+                "label": "3:4",
+                "value": "3by4"
+              },
+              {
+                "label": "3:5",
+                "value": "3by5"
+              }
+            ]
+        },
+    {
+            "id": "overlaycolor",
+            "type": "color",
+            "label": "Overlay color",
+            "default": "#000"
+        },
+    {
+            "type":   "range",
+            "id":     "overlayopacity",
+            "min":       0,
+            "max":       100,
+            "step":      10,
+            "unit":      "%",
+            "label":     "Overlay Darkness",
+            "default":   50
+      },
+    {
+            "type":   "range",
+            "id":     "radius",
+            "min":       0,
+            "max":       24,
+            "step":      4,
+            "unit":      "px",
+            "label":     "Card corner radius",
+            "default":   8
+      },
+    {
+            "type":   "range",
+            "id":     "spacing",
+            "min":       0,
+            "max":       24,
+            "step":      4,
+            "unit":      "px",
+            "label":     "Gap between cards",
+            "default":   8
+      },
+    {
+            "type": "header",
+            "content": "Text styling"
+        },
+    {
+            "id": "cardtextcolor",
+            "type": "color",
+            "label": "Text color",
+            "default": "#ffffff"
+        },
+    {
+           "type":    "font_picker",
+           "label":   "Font",
+           "id":      "customfont",
+           "default": "helvetica_n4"
+        },
+    {
+            "type": "select",
+            "id": "weight",
+            "label": "Font weight",
+            "default": "700",
+            "options": [
+              {
+                "label": "Light",
+                "value": "100"
+              },
+              {
+                "label": "Medium",
+                "value": "500"
+              },
+              {
+                "label": "Bold",
+                "value": "700"
+              }
+            ]
+        },
+    {
+
+            "type":   "range",
+            "id":     "fontsize",
+            "min":       12,
+            "max":       64,
+            "step":      4,
+            "unit":      "px",
+            "label":     "Font size",
+            "default":   24
+      },
+    {
+            "type": "select",
+            "id": "textHalign",
+            "label": "Text horizontal alignment",
+            "default": "center",
+            "options": [
+              {
+                "label": "Center",
+                "value": "center"
+              },
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              }
+            ]
+        },
+    {
+            "type": "select",
+            "id": "textValign",
+            "label": "Text vertical alignment",
+            "default": "center",
+            "options": [
+              {
+                "label": "Center",
+                "value": "center"
+              },
+              {
+                "label": "Top",
+                "value": "flex-start"
+              },
+              {
+                "label": "Bottom",
+                "value": "flex-end"
+              }
+            ]
+        },
+    {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+      {
+        "type": "card",
+        "name": "Image card",
+    "settings":
+    [
+            {
+                "id": "cardimg",
+                "type": "image_picker",
+                "label": "Logo image"
+            },
+      {
+                "type": "text",
+                "id": "cardtext",
+                "label": "Card text",
+                "default": "Card text"
+            },
+      {
+                "id": "cardlink",
+                "type": "url",
+                "label": "Card link"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Image link cards",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

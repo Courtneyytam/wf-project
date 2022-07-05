@@ -1,0 +1,255 @@
+<div class="testimonials" style="padding: {{ section.settings.padding }}px 0px; background-color: {{ section.settings.background_color }} ">
+    <div class="testimonial1_container {{ section.settings.onscroll }}">
+      <div class="testimonial1_title_wrap">
+        <h2 class="testimonial1_h3">{{ section.settings.titletext }}</h2>
+      </div>
+      <div data-animation="slide" data-easing="ease-in-quad" data-hide-arrows="1" data-duration="500" id="carousel" class="testimonial1_slider w-slider">
+        <div class="testimonial1_mask w-slider-mask">
+
+          {% if section.blocks.size == 0 %}
+
+          <div class="testimonial1_slider_nav _1 w-slide">
+            <div class="testimonial1_card_base">
+              <div class="testimonial1_card">
+                <div class="testimonial1_stars_wrap">
+                  {% for x in (1..5) %}
+                    <img src="https://www.boodl.xyz/images/star.png" alt="" class="testimonial1_star">
+                  {% endfor %}
+                </div>
+                <h5 class="testimonial1_h5">Really love the product!</h5>
+                <p class="testimonial1_paragraph">"Really love the product! It saves so much time and helps a lot in organizing our feedback. Awesome idea and huge potential."</p>
+                <div class="testimonial1_team_wrap">
+                  <div class="testimonial1_author">
+                      <div class="testimonial1_avatar" style="background-image: url('https://www.boodl.xyz/images/avatar2.jpg')"></div>
+                    <div class="testimonial1_author_wrap">
+                      <div class="testimonial1_name">SARAH LOWE</div>
+                      <div class="testimonial1_job">FACEBOOK</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial1_slider_nav _2 w-slide">
+            <div class="testimonial1_card_base">
+              <div class="testimonial1_card">
+                <div class="testimonial1_stars_wrap">
+                  {% for x in (1..5) %}
+                    <img src="https://www.boodl.xyz/images/star.png" alt="" class="testimonial1_star">
+                  {% endfor %}
+                </div>
+                <h5 class="testimonial1_h5">You need to buy this!</h5>
+                <p class="testimonial1_paragraph">"Really love the product! It saves so much time and helps a lot in organizing our feedback. Awesome idea and huge potential."</p>
+                <div class="testimonial1_team_wrap">
+                  <div class="testimonial1_author">
+                      <div class="testimonial1_avatar" style="background-image: url('https://www.boodl.xyz/images/avatar1.jpg')"></div>
+                    <div class="testimonial1_author_wrap">
+                      <div class="testimonial1_name">EUGENE MARK</div>
+                      <div class="testimonial1_job">HUBSPOT</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial1_slider_nav _3 w-slide">
+            <div class="testimonial1_card_base">
+              <div class="testimonial1_card">
+                <div class="testimonial1_stars_wrap">
+                  {% for x in (1..5) %}
+                    <img src="https://www.boodl.xyz/images/star.png" alt="" class="testimonial1_star">
+                  {% endfor %}
+                </div>
+                <h5 class="testimonial1_h5">Saves me hours!</h5>
+                <p class="testimonial1_paragraph">"Really love the product! It saves so much time and helps a lot in organizing our feedback. Awesome idea and huge potential."</p>
+                <div class="testimonial1_team_wrap">
+                  <div class="testimonial1_author">
+                      <div class="testimonial1_avatar" style="background-image: url('https://www.boodl.xyz/images/avatar5.jpg')"></div>
+                    <div class="testimonial1_author_wrap">
+                      <div class="testimonial1_name">SYDNEY SMITH</div>
+                      <div class="testimonial1_job">MAILCHIMP</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% else %}
+    {% assign block_counter = 1 %}
+      {% for block in section.blocks %}
+          <div class="testimonial1_slider_nav _{{ block_counter }} w-slide">
+            <div class="testimonial1_card_base">
+              <div class="testimonial1_card">
+                <div class="testimonial1_stars_wrap">
+                  {% for x in (1..block.settings.num_stars) %}
+                    <img src="https://www.boodl.xyz/images/star.png" alt="" class="testimonial1_star">
+                  {% endfor %}
+                </div>
+                <h5 class="testimonial1_h5">{{ block.settings.testimony_title }}</h5>
+                <p class="testimonial1_paragraph">{{ block.settings.testimony }}</p>
+                <div class="testimonial1_team_wrap">
+                  <div class="testimonial1_author">
+                    {% if block.settings.profile_img == blank %}
+                      <div class="testimonial1_avatar" style="background-image: url('https://www.boodl.xyz/images/avatar2.jpg')"></div>
+                    {% else %}
+                      <div class="testimonial1_avatar" style="background-image: url({{ block.settings.profile_img | img_url }})"></div>
+                    {% endif %}
+                    <div class="testimonial1_author_wrap">
+                      <div class="testimonial1_name">{{ block.settings.user_name }}</div>
+                      <div class="testimonial1_job">{{ block.settings.user_title }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% assign block_counter = block_counter | plus: 1 %}
+         {% endfor %}
+          {%endif%}
+
+        </div>
+          <div class="testimonial1_arrow_left w-slider-arrow-left cttm-left-{{ section.settings.position }}">
+            <div class="testimonial1_icon">
+              <img src="https://www.boodl.xyz/images/chevron-left.png" height="16" width: "16" alt="" class="">
+            </div>
+          </div>
+          <div class="testimonial1_arrow_right w-slider-arrow-right cttm-right-{{ section.settings.position }}">
+            <div class="testimonial1_icon">
+              <img src="https://www.boodl.xyz/images/chevron-right.png" height="16" width: "16" alt="" class="">
+            </div>
+          </div>
+        <div class="testimonial1_slider_nav w-slider-nav w-round"></div>
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "settings": [
+    {
+           "type":      "paragraph",
+           "content":   "Note: Section may appear broken when changes are made in the editor. Save to interact and to see changes."
+        },
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+      "default": "What people are saying"
+    },
+    {
+           "type": "select",
+           "id": "position",
+           "options": [
+              { "value": "left", "label": "Left"},
+              { "value": "right", "label": "Right"},
+              { "value": "center", "label": "Split"}
+           ],
+           "label": "Arrow positioning",
+      "default": "right"
+        },
+    {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+    "settings":
+    [
+            {
+                "id": "user_name",
+                "type": "text",
+                "label": "Customer Name",
+        "default": "JANE LOWE"
+            },
+      {
+                "id": "user_title",
+                "type": "text",
+                "label": "Customer Title",
+        "default": "CEO"
+            },
+      {
+                "id": "profile_img",
+                "type": "image_picker",
+                "label": "Customer Photo"
+            },
+      {
+
+                "type":   "range",
+                "id":     "num_stars",
+                "min":       1,
+                "max":       5,
+                "step":      1,
+                "label":     "Number of stars",
+                "default":   5
+            },
+            {
+                "id": "testimony",
+                "type": "textarea",
+                "label": "Testimony",
+        "default": "Really love the product! It saves so much time and helps a lot in organizing our feedback. Awesome idea and huge potential."
+            },
+      {
+                "id": "testimony_title",
+                "type": "text",
+                "label": "Testimony Title",
+        "default": "Really love the product!"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Testimonials",
+    "category": "Boodl: Testimonials"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

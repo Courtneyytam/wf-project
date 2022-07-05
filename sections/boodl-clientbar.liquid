@@ -1,0 +1,98 @@
+<div class="clients-section" style="
+    {% if section.settings.bgimg != blank %}
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url({{ section.settings.bgimg | img_url: 'master' }});
+    {% else %}
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('https://www.boodl.xyz/images/trees-and-birds.jpg');
+    {% endif %}">
+  <div class="clients overlay {{ section.settings.theme }}" style="padding-top: {{ section.settings.padding }}px; padding-bottom: {{ section.settings.padding }}px;">
+    {% if section.blocks.size == 0 %}
+      <a href="#" class="client-link {{ section.settings.theme }}">
+          <img class="client-logo" src="https://www.boodl.xyz/images/logo1-white.png" width="160" alt="">
+      </a>
+      <a href="#" class="client-link {{ section.settings.theme }}">
+          <img class="client-logo" src="https://www.boodl.xyz/images/logo2-white.png" width="160" alt="">
+      </a>
+      <a href="#" class="client-link {{ section.settings.theme }}">
+          <img class="client-logo" src="https://www.boodl.xyz/images/logo3-white.png" width="160" alt="">
+      </a>
+      <a href="#" class="client-link {{ section.settings.theme }}">
+          <img class="client-logo" src="https://www.boodl.xyz/images/logo4-white.png" width="160" alt="">
+      </a>
+      <a href="#" class="client-link {{ section.settings.theme }}">
+          <img class="client-logo" src="https://www.boodl.xyz/images/logo5-white.png" width="160" alt="">
+      </a>
+    {% else %}
+    {% for block in section.blocks %}
+    <a href="{{ block.settings.logolink }}" class="client-link {{ section.settings.theme }} w-inline-block">
+      {% if block.settings.logoimg != blank %}
+        <img class="client-logo" src="{{ block.settings.logoimg | img_url: '300x' }}" width="160" alt="">
+      {% else %}
+      <img class="client-logo" src="https://www.boodl.xyz/images/logo1-white.png" width="160" alt="">
+      {% endif %}
+    </a>
+    {% endfor %}
+    {% endif %}
+
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Client Logo Bar",
+    "settings": [
+    {
+            "id": "bgimg",
+            "type": "image_picker",
+            "label": "Background image"
+        },
+    {
+           "type": "radio",
+           "id": "theme",
+           "options": [
+              { "value": "light-theme", "label": "Light"},
+              { "value": "dark-theme", "label": "Dark"}
+           ],
+           "label": "Color theme",
+      "default": "dark-theme"
+        },
+    {
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   64
+      }
+  ],
+  "blocks": [
+      {
+        "type": "logo",
+        "name": "Client Logo",
+    "settings": 
+    [
+            {
+                "id": "logolink",
+                "type": "url",
+                "label": "Logo link"
+            },
+            {
+                "id": "logoimg",
+                "type": "image_picker",
+                "label": "Logo image"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Client Logo Bar",
+    "category": "Boodl: Brands & Icons"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,162 @@
+<div class="basic-contact-section" style="padding: {{ section.settings.padding }}px 8%; background-color: {{ section.settings.background_color }} ">
+  <div class="wrapper-3">
+    <div class="skills reversed">
+      <div class="skills-info">
+        <h2 class="">{{ section.settings.titletext }}</h2>
+        <p class="section-description">{{ section.settings.description }}</p>
+        {% if section.settings.button %}<div class="m01_button_wrap _skillbarbutton"><a href="{{ section.settings.buttonlink }}" class="" ><button class="btn custombtncolor">{{ section.settings.buttontext }}</button></a></div>{% endif %}
+        <style>
+          .custombtncolor{
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+            {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+          }
+          .custombtncolor:hover{
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+          }
+        </style>
+      </div>
+      <div class="skills-sliders">
+        <div class="skill-slider-wrapper">
+          {% if section.blocks.size == 0 %}
+            <h6 class="skill-slider-header">Web development</h6>
+          <div class="skill-slider-percent">80%</div>
+          <div class="skill-slider">
+            <div style="width: 80%;  background-color: #1A18A4;" class="skill-slider-progress"></div>
+          </div>
+          <h6 class="skill-slider-header">Product design</h6>
+          <div class="skill-slider-percent">97%</div>
+          <div class="skill-slider">
+            <div style="width: 97%;  background-color: #3C3AC2;" class="skill-slider-progress"></div>
+          </div>
+          <h6 class="skill-slider-header">Project management</h6>
+          <div class="skill-slider-percent">74%</div>
+          <div class="skill-slider">
+            <div style="width: 74%;  background-color: #7D7CE5;" class="skill-slider-progress"></div>
+          </div>
+          {% else %}
+          {% for block in section.blocks %}
+          <h6 class="skill-slider-header">{{ block.settings.bar_title }}</h6>
+          <div class="skill-slider-percent">{{ block.settings.bar_num }}%</div>
+          <div class="skill-slider">
+            <div style="width: {{ block.settings.bar_num }}%;  background-color: {{ block.settings.bar_color }};" class="skill-slider-progress e-scroll-in-left"></div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Skill bars",
+    "settings": [
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Title",
+      "default": "Professional Skills"
+    },
+    {
+      "type": "textarea",
+            "id": "description",
+            "label": "Description",
+      "default": "Our ships have completed their scan of the area and found nothing. If the Millennium Falcon went into light-speed."
+    },
+    {
+      "type": "header",
+        "content": "Call to Action Button"
+    },
+    {
+            "type":      "checkbox",
+            "id":        "button",
+            "label":     "Include Call to Action",
+            "default":   true
+        },
+    {
+      "type": "text",
+            "id": "buttontext",
+            "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+            "id": "buttonlink",
+            "label": "Button Link"
+    },
+    {
+            "id": "btn_color",
+            "type": "color",
+            "label": "Button color"
+        },
+    {
+            "id": "btntext_color",
+            "type": "color",
+            "label": "Button Text color"
+        },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+      {
+        "type": "skillbar",
+        "name": "Skill bar",
+    "settings":
+    [
+            {
+                "type": "text",
+                "id": "bar_title",
+                "label": "Skill title",
+                "default": "Skill title"
+            },
+            {
+                "type": "range",
+                "id": "bar_num",
+                "min": 1,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Skill percentage",
+                "default": 50
+            },
+      {
+                "id": "bar_color",
+                "type": "color",
+                "label": "Bar color",
+                "default": "#f83f5a"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Percent bars",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

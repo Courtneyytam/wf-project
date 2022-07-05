@@ -1,0 +1,152 @@
+{% assign bgimg = section.settings.bgimg %}
+<div class="section-7 estimate-image-section _override ">
+
+
+    <style>
+      .section-7._override{
+        padding-top:{{section.settings.padding}}px !important;
+        padding-bottom:{{section.settings.padding}}px !important;
+      }
+      .section-7.estimate-image-section{
+        {% if section.settings.parallax %}
+            background-attachment: scroll, fixed;
+        {% endif %}
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(17, 17, 17, 0.5)), to(rgba(17, 17, 17, 0.5))), url({% if bgimg == blank%}'https://www.boodl.xyz/images/trees-and-birds.jpg'{%else%}{{ bgimg | img_url: "master"}}{%endif%});
+        background-image: linear-gradient(180deg, rgba(17, 17, 17, 0.5), rgba(17, 17, 17, 0.5)), url({% if bgimg == blank%}'https://www.boodl.xyz/images/trees-and-birds.jpg'{%else%}{{ bgimg | img_url: "master"}}{%endif%});
+      }
+      .ctaheader-space {
+          margin-bottom: {{ section.settings.space }}px;
+      }
+    	.cta1-btncolor {
+        	{% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+      	  {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+      }
+      .cta1-btncolor:hover {
+        	{% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+		      {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+      }
+
+      {% if section.settings.button %}
+      .section-header {margin-bottom: 0px;}
+      {%endif%}
+    </style>
+    <div class="wrapper-3">
+      <div class="center-wrapper dark-bg-wrapper {{section.settings.onscroll}}">
+        {% if section.settings.icon %}<img src="{%if section.settings.iconimage == blank%}'https://www.boodl.xyz/images/tree-white.svg'{%else%}{{ section.settings.iconimage | img_url: 'master' }}{%endif%}" alt="" class="section-header-icon"> {%endif%}
+        <h2 class="ctaheader-space" >{{section.settings.header}}</h2>
+        {% if section.settings.button %}<a href="{{section.settings.buttonlink}}" class="cta1-btn" ><button class="btn cta1-btncolor" >{{section.settings.buttontext}}</button></a>{% endif %}
+      </div>
+    </div>
+  </div>
+{% schema %}
+  {
+    "name": "CTA Header",
+    "settings": [
+	{
+      "type":      "checkbox",
+      "id":        "icon",
+      "label":     "Include icon",
+      "default":   true
+    },
+	{
+          "id": "iconimage",
+          "type": "image_picker",
+          "label": "Icon image"
+    },
+	{
+		"id": "header",
+		"type": "textarea",
+		"label": "Header",
+		"default": "Create a beautiful and fully customizable shopify website using Boodl."
+	},
+	{
+      "type":      "checkbox",
+      "id":        "parallax",
+      "label":     "Parallax effect",
+      "default":   true
+    },
+	{
+          "id": "bgimg",
+          "type": "image_picker",
+          "label": "Background image"
+    },
+	{
+      "type":   "range",
+      "id":     "padding",
+      "min":       24,
+      "max":       120,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   80
+    },
+	{
+      "type": "header",
+      "content": "Call to Action Button"
+    },
+    {
+      "type":      "checkbox",
+      "id":        "button",
+      "label":     "Include Call to Action",
+      "default":   true
+    },
+	{
+      "id": "buttontext",
+      "type": "text",
+      "label": "Colored title",
+	  "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "buttonlink",
+      "label": "Button Link"
+    },
+	{
+      "id": "btn_color",
+      "type": "color",
+      "label": "Button color"
+    },
+    {
+      "id": "btntext_color",
+      "type": "color",
+      "label": "Button Text color"
+    },
+    {
+      "type":   "range",
+      "id":     "space",
+      "min":       16,
+      "max":       96,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Space between text and button",
+      "default":   24
+    },
+	{
+			"type": "header",
+   			"content": "Animation section"
+		},
+		{
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+			  { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+		 	  { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+			"default": ""
+        }
+	],
+	"presets": [{
+		"name": "CTA Header",
+		"category": "Boodl: Title Headers"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

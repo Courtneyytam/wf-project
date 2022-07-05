@@ -1,0 +1,143 @@
+<style>
+  .contactform-btncolor{
+    {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+    {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+  }
+  .contactform-btncolor:hover{
+    {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+    {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+  }
+</style>
+
+<div id="Contact-Form" class="form-contact-section" style="background-color: {{section.settings.background_color}}; padding-top: {{section.settings.padding}}px; padding-bottom: {{section.settings.padding}}px;">
+    <div class="section-header-wrapper-2">
+      <h1 class="">{{section.settings.heading}}</h1>
+      <div class="divider center" style="background-color: {{section.settings.linecolor}};"></div>
+      <p class="grey-text">{{section.settings.content}}</p>
+    </div>
+    <div class="wrapper-3 w-container">
+      <div class="request w-form">
+
+        {%- assign formId = 'ContactForm' -%}
+        {% form 'contact', id: formId %}
+        {% include 'form-status', form: form, form_id: formId %}
+
+        <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form" class="request-form">
+
+
+          <div class="request-block-half">
+            <label for="{{ formId }}-name" class="form-label">{{ 'contact.form.name' | t }}</label>
+            <input type="text" id="{{ formId }}-name" name="contact[{{ 'contact.form.name' | t }}]" class="input w-input" maxlength="256"  placeholder="Enter your name" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+
+          <div class="request-block-half">
+            <label for="{{ formId }}-email" class="form-label" >{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+            <input
+                   type="email"
+                   id="{{ formId }}-email"
+                   name="contact[email]"
+                   placeholder="Your contact email"
+                   maxlength="256"
+                   autocorrect="off"
+                   autocapitalize="off"
+                   class="input w-input"
+                   value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                   aria-required="true"
+                   {%- if form.errors contains 'email' -%}
+                     class="input--error"
+                     aria-invalid="true"
+                     aria-describedby="{{ formId }}-email-error"
+                   {%- endif -%}
+                   >
+          </div>
+
+          <div class="request-block-full">
+            <label for="{{ formId }}-message" class="form-label">{{ 'contact.form.message' | t }}</label>
+            <textarea rows="10" id="{{ formId }}-message" name="contact[{{ 'contact.form.message' | t }}]" placeholder="Enter message..." maxlength="5000" class="input text-area big w-input">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+
+          <input type="submit" value="Submit Message" data-wait="Please wait..." class="btn contactform-btncolor" value="{{ 'contact.form.submit' | t }}">
+        </form>
+
+        {% if form.posted_successfully? %}
+            <div class="form-success w-form-done">
+              <div>Thank you! Your submission has been received!</div>
+            </div>
+        {% else %}
+            <div class="form-error w-form-fail">
+              <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+        {% endif %}
+
+    {% endform %}
+
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "settings": [
+      {
+        "type": "text",
+        "id":"heading",
+        "label": "Title",
+        "default": "Drop Us a Line"
+      },
+    {
+          "id": "linecolor",
+          "type": "color",
+          "label": "Divider line color"
+        },
+      {
+      "type": "textarea",
+      "id":"content",
+      "label": "Text",
+      "default": "We help to create amazing Shopify sites for everyone all around the world. Let us know how we can help you."
+      },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+          "id": "btn_color",
+          "type": "color",
+          "label": "Button color"
+        },
+        {
+          "id": "btntext_color",
+          "type": "color",
+          "label": "Button Text color"
+        },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#f8f8f8"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       112,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   64
+      }
+    ],
+  "presets": [{
+    "name": "Contact Form",
+    "category": "Boodl: Contact"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

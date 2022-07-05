@@ -1,0 +1,294 @@
+{% capture loc-title %}
+  {% if section.settings.title != blank %}
+    <div class="tt-page__section-head--left ">
+      <div class="tt-page__title" style="color: {{ section.settings.title_color }};font-weight:{{ section.settings.t_ft }};">{{ section.settings.title }}</div>
+    </div>
+  {% endif %}
+{% endcapture %}
+
+<div data-section-id="{{ section.id }}" class="video_with_text twv-P" style="padding: {{ section.settings.padding }}px {{ section.settings.paddingLR }}%; background-color: {{ section.settings.background_color }} ">
+    <div class="{{ section.settings.onscroll }} flexcontainer {{section.settings.layout}}">
+              <div class="containerhalf video_sec">
+                {% if section.settings.video_url != blank %}
+             {{ section.settings.video_url }}
+                {% else %}
+                  <iframe width="100%" src="https://www.youtube.com/embed/IGwnJo20iSo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+                {% endif %}
+              </div>
+          
+              <div class="containerhalf twv-text">
+                <h6 style="color: {{ section.settings.pretitle_color }}; font-weight:{{ section.settings.pt_ft }};">{{ section.settings.top_head }}</h6>
+                {{ loc-title }}
+                <p>{{ section.settings.content }}</p>
+                  {% if section.settings.listitems %}
+                  {% if section.blocks.size == 0 %}
+                  <ul class="golf_list">
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      <img src="https://www.boodl.xyz/images/check-icon.png">
+                      Naturally Sourced
+                    </li>
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      <img src="https://www.boodl.xyz/images/check-icon.png">
+                      Sugar Free
+                    </li>
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      <img src="https://www.boodl.xyz/images/check-icon.png">
+                      Caffeine
+                    </li>
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      <img src="https://www.boodl.xyz/images/check-icon.png">
+                      List item
+                    </li>
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      <img src="https://www.boodl.xyz/images/check-icon.png">
+                      List item
+                    </li>
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      <img src="https://www.boodl.xyz/images/check-icon.png">
+                      List item
+                    </li>
+                  </ul>
+                  {% else %}
+                  <ul class="golf_list" {% if section.blocks.size < 4 %}style="columns: 1;"{% endif %}>
+                  {% for block in section.blocks %}
+                    <li style="color: {{ section.settings.listtext_color }}">
+                      {% if section.settings.list_img == blank %}
+                        <img src="https://www.boodl.xyz/images/check-icon.png">
+                      {% else %}
+                        <img src="{{ section.settings.list_img | img_url: 'master' }}">
+                      {% endif %}
+                      {{ block.settings.listtext }}
+                    </li>
+                  {% endfor %}
+                </ul>
+                  {% endif %}
+                  {% endif %}
+              
+                {% if section.settings.button %}
+        <a href="{{ section.settings.buttonlink}}" class="twv-btn">
+          <button class="btn twv-btncolor">{{ section.settings.buttontext }}</button>
+        </a>
+
+        <style>
+        .twv-btn {
+          margin-top: {{ section.settings.space }}px;
+        }
+        .twv-btncolor {
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+            {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+        }
+        .twv-btncolor:hover{
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+            {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+        }
+    </style>
+
+      {% endif %}
+              </div>
+    </div>
+</div>
+{% schema %}
+{
+"name": "Content with video",
+"max_blocks": 6,
+"settings": [
+  {
+    "label": "Pre-Title",
+    "id": "top_head",
+    "type": "text",
+    "default": "Section top heading"
+  },
+  {
+    "type": "select",
+    "id": "pt_ft",
+    "options": [
+      { "value": "bold", "label": "Bold"},
+      { "value": "normal", "label": "Normal"}
+    ],
+    "label": "Pre-Title Font Weight",
+    "default": "bold"
+  },
+  {
+     "type": "color",
+     "id": "pretitle_color",
+     "label": "Pre-Title color",
+     "default": "#616161"
+  },
+  {
+    "label": "Title",
+    "id": "title",
+    "type": "text",
+    "default": "Text with video",
+    "info": "Leave empty to remove"
+  },
+  {
+    "type": "select",
+    "id": "t_ft",
+    "options": [
+      { "value": "bold", "label": "Bold"},
+      { "value": "normal", "label": "Normal"}
+    ],
+    "label": "Title Font Weight",
+    "default": "bold"
+  },
+  {
+     "type": "color",
+     "id": "title_color",
+     "label": "Title color",
+     "default": "#000"
+  },
+  {
+    "label": "Text Area",
+    "id": "content",
+    "type": "textarea",
+    "default": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
+  },
+{
+      "type": "header",
+      "content": "List Items"
+    },
+  {
+      "type":      "checkbox",
+      "id":        "listitems",
+      "label":     "Include List Items",
+      "default":   true
+    },
+  {
+    "type": "image_picker",
+    "id": "list_img",
+    "label": "List Image"
+  },
+  {
+     "type": "color",
+     "id": "listtext_color",
+     "label": "List text color",
+     "default": "#000"
+  },
+{
+      "type": "header",
+      "content": "Video"
+    },
+  {
+      "id": "video_url",
+      "type": "text",
+      "label": "Video iframe",
+      "info": "Input youtube video iframe code"
+  },
+{
+      "type": "header",
+      "content": "Call to Action Button"
+    },
+    {
+      "type":      "checkbox",
+      "id":        "button",
+      "label":     "Include Call to Action",
+      "default":   true
+    },
+  {
+      "id": "buttontext",
+      "type": "text",
+      "label": "Colored title",
+    "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "buttonlink",
+      "label": "Button Link"
+    },
+  {
+      "id": "btn_color",
+      "type": "color",
+      "label": "Button color"
+    },
+    {
+      "id": "btntext_color",
+      "type": "color",
+      "label": "Button Text color"
+    },
+  {
+    "type": "header",
+      "content": "Style Section"
+  },
+      {
+           "type": "select",
+           "id": "layout",
+           "options": [
+              { "value": "_row", "label": "Video on left"},
+              { "value": "_rowreverse", "label": "Video on right"}
+           ],
+          "label": "Section layout",
+          "default": "_row"
+        },
+  {
+     "type": "color",
+     "id": "background_color",
+     "label": "Background color",
+     "default": "#ffffff"
+  },
+  {
+    "type":   "range",
+    "id":     "padding",
+    "min":       24,
+    "max":       80,
+    "step":      8,
+    "unit":      "px",
+    "label":     "Section Top/Bottom padding",
+    "default":   40
+   },
+   {
+    "type":   "range",
+    "id":     "paddingLR",
+    "min":       4,
+    "max":       24,
+    "step":      2,
+    "unit":      "px",
+    "label":     "Section Left/Right padding",
+    "default":   8
+   },
+   {
+      "type": "header",
+      "content": "Animations"
+   },
+   {
+       "type": "paragraph",
+       "content": "Save page to see changes"
+    },
+    {
+       "type": "select",
+       "id": "onscroll",
+       "options": [
+          { "value": "", "label": "No animation"},
+          { "value": "e-scroll-in-left", "label": "From left"},
+          { "value": "e-scroll-in-right", "label": "From right"},
+          { "value": "e-scroll-in", "label": "From bottom"}
+       ],
+      "label": "Appear on scroll",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list-item",
+      "name": "List Item",
+      "settings": 
+      [
+          {
+              "id": "listtext",
+              "type": "text",
+              "label": "List text",
+              "placeholder": "List text",
+              "default": "List text"
+          }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with video",
+      "category": "Boodl: Content"
+    }
+  ]
+}
+
+{% endschema %}

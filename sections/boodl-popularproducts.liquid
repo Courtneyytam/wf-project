@@ -1,0 +1,176 @@
+
+{%- assign product1 = all_products[section.settings.product1] -%}
+{%- assign product2 = all_products[section.settings.product2] -%}
+{%- assign product3 = all_products[section.settings.product3] -%}
+
+<style>
+  .pp-btncolor{
+    {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+    {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+  }
+  .pp-btncolor:hover{
+    {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+    {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+  }
+  .pp-container{
+    padding-top: {{section.settings.padding}}px;
+    padding-bottom: {{section.settings.padding}}px;
+  }
+</style>
+
+<div class="pp-container {{section.settings.onscroll}}">
+    <div class="pp-div-block pp-columns">
+
+        {% if section.settings.product1 == blank %}
+        <div class="pp-column pp-w-col">
+          <div class="pp-product" style="background-image: url('https://www.boodl.xyz/images/adidas.jpg')"></div>
+          <div class="pp-text-block">Clothing | Adidas Hoodie</div>
+          <h1 class="pp-heading-6"><strong class="pp-old-price">$55.00</strong> | $23.99 </h1>
+          <a href="#" class="">
+            <button class="btn pp-btncolor">{{section.settings.buttontext}}</button>
+          </a>
+        </div>
+        {% else %}
+
+        <div class="pp-column pp-w-col">
+          <div class="pp-product" style="background-image: url({{ product1.featured_image | img_url: "master" }})"></div>
+          <div class="pp-text-block">{% if product1.type != blank %}{{ product1.type }} | {%endif%}{{ product1.title }}</div>
+          <h1 class="pp-heading-6">
+            {% if product1.compare_at_price != blank %}
+              <strong class="pp-old-price">{{ product1.compare_at_price | money }}</strong> |
+            {% endif %}
+            {{ product1.price | money }}</h1>
+          <a href="{{product1.url}}" class="">
+            <button class="btn pp-btncolor">{{section.settings.buttontext}}</button>
+          </a>
+        </div>
+
+        {% endif %}
+        {% if section.settings.product2 == blank %}
+        <div class="pp-column pp-w-col">
+          <div class="pp-product" style="background-image: url('https://www.boodl.xyz/images/canada-goose.png')"></div>
+          <div class="pp-text-block">Outerwear | Canada Goose </div>
+          <h1 class="pp-heading-6">
+            <strong class="pp-old-price">$524.00</strong> | $142.00 </h1>
+          <a href="#" class="">
+            <button class="btn pp-btncolor">{{section.settings.buttontext}}</button>
+          </a>
+        </div>
+        {%else%}
+        <div class="pp-column pp-w-col">
+          <div class="pp-product" style="background-image: url({{ product2.featured_image | img_url: "master" }})"></div>
+          <div class="pp-text-block">{% if product2.type != blank %}{{ product2.type }} | {%endif%}{{ product2.title }}</div>
+          <h1 class="pp-heading-6">
+
+            {% if product2.compare_at_price != blank %}
+              <strong class="pp-old-price">{{ product2.compare_at_price | money }}</strong> |
+            {% endif %}
+            {{ product2.price | money }}</h1>
+          <a href="{{product2.url}}" class="">
+            <button class="btn pp-btncolor">{{section.settings.buttontext}}</button>
+          </a>
+        </div>
+        {%endif%}
+        {% if section.settings.product3 == blank %}
+        <div class="pp-column pp-w-col">
+          <div class="pp-product" style="background-image: url('https://www.boodl.xyz/images/nike-air.png')"></div>
+          <div class="pp-text-block">Sports | Nike Air Tank </div>
+          <h1 class="pp-heading-6"><strong class="pp-old-price">$60.00</strong> | $42.00 </h1>
+          <a href="#" class="">
+            <button class="btn pp-btncolor">{{section.settings.buttontext}}</button>
+          </a>
+        </div>
+        {%else%}
+        <div class="pp-column pp-w-col">
+          <div class="pp-product" style="background-image: url({{ product3.featured_image | img_url: "master" }})"></div>
+          <div class="pp-text-block">{% if product3.type != blank %}{{ product3.type }} | {%endif%}{{ product3.title }}</div>
+          <h1 class="pp-heading-6">
+            {% if product3.compare_at_price != blank %}
+              <strong class="pp-old-price">{{ product3.compare_at_price | money }}</strong> |
+            {% endif %}
+            {{ product3.price | money }}</h1>
+          <a href="{{product3.url}}" class="">
+            <button class="btn pp-btncolor">{{section.settings.buttontext}}</button>
+          </a>
+        </div>
+        {%endif%}
+
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Popular Products",
+    "settings": [
+  {
+       "type":      "product",
+       "id":        "product1",
+       "label":     "Product 1"
+    },
+  {
+       "type":      "product",
+       "id":        "product2",
+       "label":     "Product 2"
+    },
+  {
+       "type":      "product",
+       "id":        "product3",
+       "label":     "Product 3"
+    },
+  {
+      "id": "buttontext",
+      "type": "text",
+      "label": "Button text",
+    "default": "Shop now"
+    },
+  {
+      "id": "btn_color",
+      "type": "color",
+      "label": "Button color"
+    },
+    {
+      "id": "btntext_color",
+      "type": "color",
+      "label": "Button Text color"
+    },
+  {
+          "type": "header",
+            "content": "Section Styling"
+        },
+  {
+      "type":   "range",
+      "id":     "padding",
+      "min":       0,
+      "max":       96,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   64
+    },
+  {
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Appear on scroll",
+          "default": ""
+        }
+  ],
+  "presets": [{
+    "name": "Popular Products",
+    "category": "Boodl: Products"
+    }]
+  }
+{% endschema %}

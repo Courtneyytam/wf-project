@@ -1,0 +1,215 @@
+{% if section.settings.fullwidth %}
+  {% assign fullwidth = "" %}
+{% else %}
+  {% assign fullwidth = "_padding" %}
+{% endif %}
+
+{% if section.settings.fullheight %}
+  {% assign fullheight = " slider-fullheight" %}
+{% endif %}
+
+<div class=" slideshow-width{{fullwidth}}" style="padding-top: {{ section.settings.padding }}px; padding-bottom: {{ section.settings.padding }}px; background-color: {{ section.settings.background_color }} ">
+    <div data-animation="slide" data-infinite="1" data-easing="ease-in-out-quart" data-duration="500" data-delay="{{ section.settings.time | times: 1000 }}"{% if section.settings.autoplay %} data-autoplay="1" {% endif %} class="work-slider w-slider {{fullheight}} {{section.settings.scrollin}}">
+      <div class="w-slider-mask">
+
+        {% if section.blocks.size == 0 %}
+        <div class="work-slide w-slide" style="background-image: url('https://www.boodl.xyz/images/trees-and-birds.jpg');">
+          <div class="slider-text-block">
+            <h5 class="slider-category-title">Photography</h5>
+            <h4 class="slider-title">Aerial views of New York</h4>
+            <p class="intro-paragraph slider w-hidden-small w-hidden-tiny">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elemen.</p>
+            <a href="#" class="slider"><button class="btn btn--secondary ">View more</button></a>
+          </div>
+        </div>
+        <div class="work-slide w-slide" style="background-image: url('https://www.boodl.xyz/images/desert.jpg');">
+          <div class="slider-text-block">
+            <h5 class="slider-category-title">Photography</h5>
+            <h4 class="slider-title">Photoshoot 2014 for Music Studio Dotted</h4>
+            <p class="intro-paragraph slider w-hidden-small w-hidden-tiny">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in.</p>
+            <a href="#" class="slider"><button class="btn btn--secondary ">View more</button></a>
+          </div>
+        </div>
+        <div class="work-slide w-slide" style="background-image: url('https://www.boodl.xyz/images/mountain.jpg');">
+          <div class="slider-text-block">
+            <h5 class="slider-category-title">Photography</h5>
+            <h4 class="slider-title">The Altai Mountain Range of Mongolia</h4>
+            <p class="intro-paragraph slider w-hidden-small w-hidden-tiny">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elemen.</p>
+            <a href="#" class="slider"><button class="btn btn--secondary ">View more</button></a>
+          </div>
+        </div>
+        {% else %}
+          {% for block in section.blocks %}
+            <div class="work-slide w-slide" style="background-image: url({% if block.settings.image == blank %} 'https://www.boodl.xyz/images/trees-and-birds.jpg' {% else %} {{ block.settings.image | img_url: 'master' }} {% endif %});">
+                  <div class="slider-text-block">
+                    <h5 class="slider-category-title">{{block.settings.header}}</h5>
+                    <h4 class="slider-title">{{block.settings.titletext}}</h4>
+                    <p class="intro-paragraph slider w-hidden-small w-hidden-tiny">{{block.settings.content}}</p>
+                    {% if block.settings.btntext != blank%}<a href="{{block.settings.link}}" class="slider"><button class="slider-btn btn btn--secondary ">{{block.settings.btntext}}</button></a>{% endif %}
+                  </div>
+                </div>
+          {% endfor %}
+        {% endif %}
+
+      </div>
+      <div class="w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-slider-arrow-left">
+        <div class="w-icon-slider-left"></div>
+      </div>
+      <div class="w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-slider-arrow-right">
+        <div class="w-icon-slider-right"></div>
+      </div>
+      {% if section.settings.sliderdots %}
+      <div class="slider-nav w-hidden-tiny w-slider-nav w-round"></div>
+      {% endif %}
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Slideshow 1",
+    "settings": [
+  {
+           "type":      "paragraph",
+           "content":   "Note: Section may appear broken when changes are not saved. Please save page to see this section in action!"
+        },
+  {
+      "type":      "checkbox",
+      "id":        "autoplay",
+      "label":     "Autoplay",
+      "default":   true
+    },
+  {
+      "type":   "range",
+      "id":     "time",
+      "min":       2,
+      "max":       20,
+      "step":      1,
+      "unit":      "sec",
+      "label":     "Time per slide",
+      "default":   5
+    },
+  {
+      "type":      "checkbox",
+      "id":        "sliderdots",
+      "label":     "Show slider dots",
+      "default":   true
+    },
+
+  {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       0,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      },
+    {
+          "type":      "checkbox",
+          "id":        "fullwidth",
+          "label":     "Full width slideshow",
+          "default":   false
+        },
+        {
+          "type":      "checkbox",
+          "id":        "fullheight",
+          "label":     "Full height slideshow",
+          "default":   false
+        },
+    {
+            "type": "header",
+            "content": "Animations"
+        },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+            "type": "select",
+            "id": "scrollin",
+            "label": "On scroll text animation",
+            "default": "e-scroll-in",
+            "options": [
+              {
+                "label": "Scroll in from bottom",
+                "value": "e-scroll-in"
+              },
+              {
+                "label": "Scroll in from left",
+                "value": "e-scroll-in-left"
+              },
+              {
+                "label": "Scroll in from right",
+                "value": "e-scroll-in-right"
+              },
+              {
+                "label": "No animation",
+                "value": "e"
+              }
+            ]
+        }
+  ],
+  "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+    "settings":
+    [
+            {
+                "id": "image",
+                "type": "image_picker",
+                "label": "Slide image"
+            },
+            {
+                "id": "header",
+                "type": "text",
+                "label": "Header",
+        "default": "HEADER"
+            },
+      {
+                "id": "titletext",
+                "type": "text",
+                "label": "Title",
+        "default": "The slide title goes here"
+            },
+      {
+                "type": "paragraph",
+                "content": "To remove button from slide, remove text from 'Button text' field"
+      },
+      {
+                "id": "btntext",
+                "type": "text",
+                "label": "Button text",
+        "default": "Learn more"
+            },
+      {
+                "id": "link",
+                "type": "url",
+                "label": "Button link"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Slideshow 1",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

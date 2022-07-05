@@ -1,0 +1,138 @@
+<div class="iconbar-wrapper" style="padding: {{ section.settings.padding }}px 0px; background-color: {{ section.settings.background_color }} ">
+  <div class="features {{ section.settings.onscroll }}">
+    
+    {% if section.blocks.size == 0 %}
+    
+        <div class="feature">
+          <div><img src="https://www.boodl.xyz/images/compass.svg" width="75" sizes="(max-width: 479px) 34vw, 75px" alt=""></div>
+          <h3 class="iconbar-text" style="color: {{ section.settings.textcolor }}">ethically sourced</h3>
+        </div>
+    
+      <div class="feature">
+          <div><img src="https://www.boodl.xyz/images/snow.svg" width="75" sizes="(max-width: 479px) 34vw, 75px" alt=""></div>
+          <h3 class="iconbar-text" style="color: {{ section.settings.textcolor }}">temperature resistant</h3>
+        </div>
+    
+      <div class="feature">
+          <div><img src="https://www.boodl.xyz/images/lighthouse.svg" width="75" sizes="(max-width: 479px) 34vw, 75px" alt=""></div>
+          <h3 class="iconbar-text" style="color: {{ section.settings.textcolor }}">true north</h3>
+        </div>
+    
+      <div class="feature">
+          <div><img src="https://www.boodl.xyz/images/mountain.svg" width="75" sizes="(max-width: 479px) 34vw, 75px" alt=""></div>
+          <h3 class="iconbar-text" style="color: {{ section.settings.textcolor }}">weather resistant</h3>
+        </div>
+    
+      <div class="feature">
+          <div><img src="https://www.boodl.xyz/images/snowfall.svg" width="75" sizes="(max-width: 479px) 34vw, 75px" alt=""></div>
+          <h3 class="iconbar-text" style="color: {{ section.settings.textcolor }}">outdoor approved</h3>
+        </div>
+    
+    {% else %}
+    {% for block in section.blocks %}
+    <div class="feature">
+      <div>
+        {% if block.settings.icon == blank %}
+        <img src="https://www.boodl.xyz/images/compass.svg" width="75" sizes="(max-width: 479px) 34vw, 75px" alt="">
+        {% else %}
+        <img src="{{ block.settings.icon | img_url: '300x' }}" width="75" sizes="(max-width: 479px) 34vw, 75px" alt="">
+        {% endif %}
+      </div>
+      <h3 class="iconbar-text" style="color: {{ section.settings.textcolor }}">{{ block.settings.icontext }}</h3>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Icon bar",
+  "max_blocks": 5,
+    "settings": [
+    {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "textcolor",
+           "label": "Text color",
+           "default": "#000"
+        },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+      
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+    {
+          "type": "icon",
+          "name": "Icon",
+          "settings": 
+          [
+              {
+                  "id": "icontext",
+                  "type": "text",
+                  "label": "Icon text",
+          "placeholder": "icon text",
+          "default": "ethically sourced"
+              },
+              {
+                  "id": "icon",
+                  "type": "image_picker",
+                  "label": "Icon"
+              }
+          ]
+        }
+  ],
+  "presets": [
+  {
+    "name": "Icon bar",
+    "category": "Boodl: Brands & Icons",
+    "blocks": [
+          
+        ]
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

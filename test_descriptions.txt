@@ -1,0 +1,92 @@
+Test Case 1: Activate test account
+1. Go to Settings tab.
+2. In the subscription settings Premium card, click "Got a promo code?"
+3. In the promo code input, enter "341512956" and click Activate.
+
+Expected Result: 
+"Successfully registered" banner should appear.
+"Current Plan" pill should appear on Premium card.
+"App Settings" should appear in the settings page, with a "Theme to edit" dropdown.
+
+=======================================================================================
+Remaining test cases should be complete after completing test case 1 and activating an account.
+
+Test Case 2: Check nullstates.
+1. Go to Page Builder tab.
+2. Go to Section Library tab.
+
+Expected Result:
+Both tabs should have a single card saying "Pick a theme to get started".
+
+
+Test Case 3: Select Theme
+1. Go to Settings tab.
+2. Select the "Theme to edit dropdown" and pick a theme e.g. Debut.
+3. Click Save.
+Expected Result:
+A toast should appear saying "Success"
+Clicking on Page Builder or Section Library tabs should no longer show the nullstate.
+
+
+Test Case 4: Section Library
+1. Go to Section Library.
+2. Enter "FAQ" into search bar.
+Expected sub result: Only one card should now be visible, titled "FAQ"
+3. Click Enable.
+4. Navigate out of the app to Online Store > Themes.
+5. Click "Customize" for whichever theme has been selected in boodl (e.g. Debut)
+6. Click "Add Section"
+Expected sub result: In the section list, there should be a category "BOODL" with one element "FAQ"
+7. Click FAQ; click Add; click Save in top right of page.
+Expected Result:
+An FAQ section should be added to the page. Clicking the title of elements in the FAQ should expand them to reveal lorem ipsum text.
+
+
+Test Case 5: Page Builder create new
+1. Go to Page Builder.
+2. Click "Create New."
+3. Enter "TestCase5" as the Page name.
+4. Click "Add Section"
+5. In the Add Section modal, Click the "Boodl" button.
+Expected sub result: Only the boodl sections should be visible, in particular "boodl-faq".
+6. Click "Add" on the boodl-faq card.
+7. Click "Save"
+8. Go to Online Store > Themes
+9. For the selected theme (Debut), click "Actions > Edit code"
+Expected Result: In the templates folder there should be a file titled "page.TestCase5.liquid" with the contents:
+"{% section 'boodl-faq' %}"
+
+Test Case 6: Page Builder rearrange sections
+1. Go to Page Builder.
+2. Click "Create New."
+3. Enter "TestCase6" as the Page name.
+4. Click "Add Section"
+5. In the Add Section modal, click "Add" on any non-boodl section.
+6. Still in the Add Section modal, click the "Boodl" button.
+Expected sub result: Only the boodl sections should be visible, in particular "boodl-faq".
+7. Click "Add" on the boodl-faq card.
+8. Click and drag either section card to rearrange them, putting the boodl faq at the top.
+9. Click "Save"
+10. Go to Online Store > Themes
+11. For the selected theme (Debut), click "Actions > Edit code"
+Expected Result: In the templates folder there should be a file titled "page.TestCase6.liquid" with the contents:
+"
+{% section 'boodl-faq' %}
+{% section <other section name> %}
+"
+
+Test Case 7: Page Builder unique section
+1. Go to Page Builder.
+2. Click "Create New."
+3. Enter "TestCase7" as the Page name.
+4. Click "Add Section"
+5. In the Add Section modal, Click the "Boodl" button.
+Expected sub result: Only the boodl sections should be visible, in particular "boodl-faq".
+6. Click "Add" on the boodl-faq card.
+7. On the faq tile, click "Unique".
+7. Click "Save"
+8. Go to Online Store > Themes
+9. For the selected theme (Debut), click "Actions > Edit code"
+Expected Result: In the templates folder there should be a file titled "page.TestCase7.liquid" with the contents:
+"{% section 'boodl-faq-boodl-uniq-xxxxx' %}" where the xs are random letters. In addition, in the sections folder there should be
+a file named the corresponding boodl-faq-boodl-uniq-xxxxx.liquid.

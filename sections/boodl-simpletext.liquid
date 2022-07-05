@@ -1,0 +1,154 @@
+<div class="textcontainer" id="_{{section.id}}">
+  <div class="_simpletext {{section.settings.column}}">{{section.settings.content}}</div>
+  <style>
+      #_{{section.id}}.textcontainer{
+        padding: {{ section.settings.padding }}px 8%;
+        background-color: {{ section.settings.background_color }};
+      }
+      ._simpletext p {
+        color:{{section.settings.textcolor}};
+      }
+      ._simpletext{
+        margin: auto;
+        max-width: 1200px;
+        text-align:{{ section.settings.textalign }};
+        font-size:{{section.settings.fontsize}}px;
+      }
+      ._simpletext._2columns{
+        columns: 2;
+        column-gap: {{section.settings.gap}}px;
+      }
+      @media screen and (max-width: 767px) {
+        ._simpletext._2columns{
+          columns: 1;
+        }
+      }
+      </style>
+</div>
+
+{% schema %}
+  {
+    "name": "Simple Text",
+    "settings": [
+  {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+    "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ullamcorper erat, et mollis nisi faucibus ut. Mauris quis suscipit quam. Integer at mi eu dolor hendrerit pulvinar. Aliquam id placerat felis, nec vestibulum nisi. Fusce cursus nulla arcu. Proin aliquam orci quis faucibus bibendum. Phasellus mattis lorem sem, et vulputate lectus luctus quis. Phasellus augue libero, ornare eget sem nec, ullamcorper venenatis purus. <br> <br> Proin congue ipsum dolor, eget sollicitudin erat euismod eget. Maecenas faucibus vulputate mauris sed ultrices. Duis egestas varius nisi, eget tincidunt ipsum maximus ac. Duis gravida mollis mi et tempor. Mauris volutpat libero eu diam sodales posuere. Suspendisse commodo lacus sit amet turpis molestie iaculis. Nulla vel lobortis quam. Nam eu lacus venenatis, feugiat justo a, aliquam sapien. Etiam pulvinar leo eu tempus placerat. Duis scelerisque libero ante, et venenatis nisl vehicula at. Praesent in consequat mi.</p>"
+    },
+  {
+      "type":   "range",
+      "id":     "fontsize",
+      "min":       16,
+      "max":       64,
+      "step":      4,
+      "unit":      "px",
+      "label":     "Font size",
+      "default":   16
+    },
+  {
+      "id": "textcolor",
+      "type": "color",
+      "label": "Text color",
+      "default": "#000"
+    },
+  {
+      "type": "header",
+      "content": "Section styling"
+      },
+  {
+      "type": "select",
+      "id": "column",
+      "label": "Number of columns",
+      "default": "",
+      "options": [
+        {
+          "label": "Single column",
+          "value": ""
+        },
+        {
+          "label": "Double column",
+          "value": "_2columns"
+        }
+      ]
+      },
+{
+      "type":   "range",
+      "id":     "gap",
+      "min":       24,
+      "max":       80,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Column gap",
+      "default":   40,
+    "info":"Only applies when Double column is selected"
+      },
+      {
+      "type": "select",
+      "id": "textalign",
+      "label": "Content alignment",
+      "default": "left",
+      "options": [
+      {
+      "label": "Center",
+      "value": "center"
+      },
+      {
+      "label": "Left",
+      "value": "left"
+      },
+      {
+      "label": "Right",
+      "value": "right"
+      }
+      ]
+      },
+      {
+      "type":   "range",
+      "id":     "padding",
+      "min":       24,
+      "max":       96,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   64
+      },
+  {
+      "id": "background_color",
+      "type": "color",
+      "label": "Backround color",
+      "default": "#FAFAFA"
+    },
+  {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+       "type":      "paragraph",
+       "content":   "Save page to see changes"
+    },
+    {
+       "type": "select",
+       "id": "onscroll",
+       "options": [
+          { "value": "", "label": "No animation"},
+          { "value": "e-scroll-in-left", "label": "From left"},
+          { "value": "e-scroll-in-right", "label": "From right"},
+          { "value": "e-scroll-in", "label": "From bottom"}
+       ],
+      "label": "Appear on scroll",
+      "default": ""
+    }
+  ],
+  "presets": [{
+    "name": "Simple paragraph",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

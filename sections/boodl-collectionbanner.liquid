@@ -1,0 +1,254 @@
+{% if section.settings.sliderdots == true %}
+  {% assign sliderdots = 'block' %}
+{% else %}
+  {% assign sliderdots = 'none' %}
+{% endif %}
+
+<div class="cb-store-home-wrap {{section.settings.onscroll}}" id="_{{section.id}}">
+    <div class="cb-div-block">
+      <div data-animation="slide" data-hide-arrows="1" data-duration="500" data-infinite="1" class="cb-slider w-slider">
+        <div class="cb-mask w-slider-mask">
+          <div class="cb-slide-main w-slide" id="img{{section.id}}">
+            <div class="cb-main-slide-content" style="align-items: {{section.settings.vlayout}}">
+            <div class="cb-div-block-30">
+              <h1 class="cb-heading-3">{{section.settings.maintitle}}</h1>
+              <div class="cb-text-block-13">{{section.settings.text}}</div>
+              <a href="{{section.settings.mainbtnlink}}" class="sliderbtn">
+                <button class="btn slidebtncolor">{{section.settings.mainbtntext}}</button>
+              </a>
+              </div>
+            </div>
+          </div>
+
+          {% if section.blocks.size == 0 %}
+          <div class="cb-slide w-slide" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('https://www.boodl.xyz/images/converse.jpg');
+          background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.boodl.xyz/images/converse.jpg');">
+            <div class="cb-slide-content" style="align-items: {{section.settings.vlayout}};">
+              <div class="cb-slide-content-container">
+                <h1 class="cb-slide-heading">CONVERSE</h1>
+                <a href="#" class="sliderbtn">
+                  <button class="btn">View Collection</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="cb-slide w-slide" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('https://www.boodl.xyz/images/levis-jeans.jpg');
+          background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.boodl.xyz/images/levis-jeans.jpg');">
+            <div class="cb-slide-content" style="align-items: {{section.settings.vlayout}};">
+              <div class="cb-slide-content-container">
+                <h1 class="cb-slide-heading">LEVI'S</h1>
+                <a href="#" class="sliderbtn">
+                  <button class="btn">View Collection</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="cb-slide w-slide" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('https://www.boodl.xyz/images/nike-air.png');
+          background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.boodl.xyz/images/nike-air.png');">
+            <div class="cb-slide-content" style="align-items: {{section.settings.vlayout}};">
+              <div class="cb-slide-content-container">
+                <h1 class="cb-slide-heading">NIKE</h1>
+                <a href="#" class="sliderbtn">
+                  <button class="btn">View Collection</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+    {% for block in section.blocks %}
+          <div class="cb-slide w-slide _{{forloop.index}}" id="_{{section.id}}">
+            <style>
+              #_{{section.id}}.cb-slide._{{forloop.index}}{
+                background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url({%if block.settings.img != blank%}{{ block.settings.img | img_url: "master"}}{%else%}'https://www.boodl.xyz/images/converse.jpg'{%endif%});
+          background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({%if block.settings.img != blank%}{{ block.settings.img | img_url: "master"}}{%else%}'https://www.boodl.xyz/images/converse.jpg'{%endif%});
+              }
+            </style>
+            <div class="cb-slide-content" style="align-items: {{section.settings.vlayout}};">
+              <div class="cb-slide-content-container">
+                <h1 class="cb-slide-heading">{{block.settings.titletext}}</h1>
+                <a href="{{block.settings.btnlink}}" class="sliderbtn">
+                  <button class="btn slidebtncolor">{{block.settings.btntext}}</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+        <div class="cb-lt-arrow w-slider-arrow-left">
+          <img src="https://www.boodl.xyz/images/chevron-left.png" style="vertical-align: super;">
+        </div>
+        <div class="cb-rt-arrow w-slider-arrow-right">
+          <img src="https://www.boodl.xyz/images/chevron-right.png" style="vertical-align: super;">
+        </div>
+        <div class="sliderdots slide-nav-2 w-slider-nav w-round" id="_{{section.id}}dots"></div>
+      </div>
+    </div>
+  </div>
+<style>
+  #img{{section.id}}.cb-slide-main{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url({%if section.settings.mainimg != blank%}{{section.settings.mainimg | img_url: "master" }}{%else%}'https://www.boodl.xyz/images/kids.jpg'{%endif%});
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({%if section.settings.mainimg != blank%}{{section.settings.mainimg | img_url: "master" }}{%else%}'https://www.boodl.xyz/images/kids.jpg'{%endif%});
+  }
+   #_{{section.id}}.cb-store-home-wrap{
+    padding: {{section.settings.padding}}px 0px;
+  }
+  #_{{section.id}}dots.sliderdots {
+    display: {{ sliderdots }};
+  }
+  .slidebtncolor{
+    {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+    {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+  }
+  .slidebtncolor:hover{
+    {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+    {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Collection banner",
+    "settings": [
+    {
+      "type": "paragraph",
+        "content": "Note: You must save changes to view updates. This section may not be interactable when changes are being made in the editor."
+    },
+    {
+      "type": "header",
+        "content": "Primary Slide Content"
+    },
+    {
+                "type": "text",
+                "id": "maintitle",
+                "label": "Slide title",
+                "default": "BRANDS YOU LOVE"
+            },
+    {
+                "type": "text",
+                "id": "text",
+                "label": "Slide text",
+                "default": "Brand 1 | Brand 2 | Converse | Roots | OVO | + More"
+            },
+      {
+                "type": "text",
+                "id": "mainbtntext",
+                "label": "Button text",
+                "default": "View Collection"
+            },
+            {
+                "id": "mainbtnlink",
+                "type": "url",
+                "label": "Button link"
+            },
+            {
+                "id": "mainimg",
+                "type": "image_picker",
+                "label": "Slide image"
+            },
+    {
+      "type": "header",
+        "content": "Section styling"
+    },
+    {
+            "type":      "checkbox",
+            "id":        "sliderdots",
+            "label":     "Show slider dots",
+            "default":   true
+          },
+    {
+          "id": "btn_color",
+          "type": "color",
+          "label": "Button color"
+        },
+        {
+          "id": "btntext_color",
+          "type": "color",
+          "label": "Button Text color"
+        },
+    {
+           "type": "select",
+           "id": "vlayout",
+           "options": [
+              { "value": "flex-start", "label": "Top"},
+              { "value": "center", "label": "Center"},
+              { "value": "flex-end", "label": "Bottom"}
+           ],
+          "label": "Vertical content alignment",
+          "default": "flex-end"
+        },
+    {
+          "type":   "range",
+          "id":     "padding",
+          "min":       8,
+          "max":       96,
+          "step":      8,
+          "unit":      "px",
+          "label":     "Section padding",
+          "default":   40
+        },
+    {
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Appear on scroll",
+          "default": ""
+        }
+  ],
+  "blocks": [
+      {
+        "type": "logo",
+        "name": "Collection slide",
+    "settings":
+    [
+      {
+                "type": "text",
+                "id": "titletext",
+                "label": "Slide title",
+                "default": "Title"
+            },
+      {
+                "type": "text",
+                "id": "btntext",
+                "label": "Button text",
+                "default": "View Collection"
+            },
+            {
+                "id": "btnlink",
+                "type": "url",
+                "label": "Button link"
+            },
+            {
+                "id": "img",
+                "type": "image_picker",
+                "label": "Slide image"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Collection banner",
+    "category": "Boodl: Collections"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,219 @@
+<div class="flexcontainer {{section.settings.layout}}" style="background-color: {{section.settings.background_color}}">
+  <div class="containerhalf {{section.settings.onscrollimg}}">
+    <div class="imagecover" style="background-image:url({% if section.settings.mainimg != blank %}{{section.settings.mainimg | img_url: 'master' }}{%else%}'https://www.boodl.xyz/images/mountain-mirror.jpg'{%endif%});"></div>
+  </div>
+  <div class="containerhalf textalign{{section.settings.textalign}} textcontainerpadding _tb {{section.settings.onscrolltext}}">
+    <div><h2>{{section.settings.titletext}}</h2>
+      <p>{{section.settings.content}}</p>
+
+
+    <style>
+        .textcontainerpadding._tb{
+          {% if section.settings.square %}
+            height: 50vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          {%endif%}
+            padding-top:{{section.settings.padding}}px;
+            padding-bottom:{{section.settings.padding}}px;
+          }
+      </style>
+    {% if section.settings.button %}
+      <div class="button_wrap it_button" >
+            <a href="{{ section.settings.buttonlink }}" class="" >
+              <button class="btn  it-custombtncolor">{{ section.settings.buttontext }}</button>
+            </a>
+      </div>
+
+      <style>
+        .it_button {
+          margin-top: {{ section.settings.space }}px;
+        }
+        .it-custombtncolor{
+            {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+            {% if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+        }
+        .it-custombtncolor:hover{
+          {% if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+        }
+      </style>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image and text",
+    "settings":
+  [
+        {
+            "type": "header",
+            "content": "Content"
+        },
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+      "default": "Our Partners"
+    },
+    {
+            "type": "textarea",
+            "id": "content",
+            "label": "Main Text",
+            "default": "Our ships have completed their scan of the area and found nothing. If the Millennium Falcon went into light-speed."
+        },
+    {
+            "id": "textcolor",
+            "type": "color",
+            "label": "Text color",
+      "default": "#ffffff"
+        },
+    {
+          "id": "mainimg",
+          "type": "image_picker",
+          "label": "Main image"
+        },
+    {
+            "type": "header",
+            "content": "Call to Action Button"
+        },
+    {
+            "type":      "checkbox",
+            "id":        "button",
+            "label":     "Include Call to Action",
+            "default":   true
+        },
+    {
+      "type": "text",
+            "id": "buttontext",
+            "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+            "id": "buttonlink",
+            "label": "Button Link"
+    },
+    {
+            "id": "btn_color",
+            "type": "color",
+            "label": "Button color"
+        },
+    {
+            "id": "btntext_color",
+            "type": "color",
+            "label": "Button Text color"
+        },
+    {
+            "type":   "range",
+            "id":     "space",
+            "min":       16,
+            "max":       96,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Space between text and button",
+            "default":   24
+      },
+    {
+            "type": "header",
+            "content": "Section styling"
+        },
+    {
+            "type":      "checkbox",
+            "id":        "square",
+            "label":     "Square image ratio",
+            "default":   false
+        },
+    {
+           "type": "select",
+           "id": "layout",
+           "options": [
+              { "value": "_row", "label": "Image on left"},
+              { "value": "_rowreverse", "label": "Image on right"}
+           ],
+          "label": "Section layout",
+          "default": "_row"
+        },
+    {
+            "type": "select",
+            "id": "textalign",
+            "label": "Content alignment",
+            "default": "center",
+            "options": [
+              {
+                "label": "Center",
+                "value": "center"
+              },
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              }
+            ]
+        },
+    {
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       96,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   64
+      },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+        {
+          "type": "header",
+            "content": "Animations"
+        },
+        {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+        {
+           "type": "select",
+           "id": "onscrollimg",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Image appear on scroll",
+          "default": "e-scroll-in-left"
+        },
+    {
+           "type": "select",
+           "id": "onscrolltext",
+           "options": [
+              { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+              { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+          "label": "Text appear on scroll",
+          "default": ""
+        }
+  ],
+  "presets": [{
+    "name": "Image and text",
+    "category": "Boodl: Content"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

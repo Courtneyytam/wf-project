@@ -1,0 +1,3 @@
+{"planName":"Standard","planLevel":{"$numberInt":"1"},"price":{"currencyCode":"USD","amount":{"$numberInt":"35"}},"planDescription":"Good for most businesses. Includes 10 deluxe sections along with sections anywhere editor.","trialDays":{"$numberInt":"7"}}
+{"planName":"Premium","planLevel":{"$numberInt":"2"},"price":{"currencyCode":"USD","amount":{"$numberInt":"75"}},"planDescription":"All-inclusive package. Comes with over 25 deluxe animated scetions.","trialDays":{"$numberInt":"0"}}
+{"planName":"Agency","planLevel":{"$numberInt":"3"},"price":{"currencyCode":"USD","amount":{"$numberInt":"0"}},"planDescription":"Perfect for managing portfolios of apps. Contact us for more details.","trialDays":{"$numberInt":"0"}}

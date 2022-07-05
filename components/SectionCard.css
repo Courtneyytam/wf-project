@@ -1,0 +1,9 @@
+.section-thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+.thumbnail-disabled {
+  opacity: 0.4;
+  filter: grayscale(100%);
+}

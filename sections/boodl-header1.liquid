@@ -1,0 +1,110 @@
+  <div class="" style="padding: {{ section.settings.padding }}px 8%; background-color: {{ section.settings.background_color }} ">
+    <div class="max-container-size">
+      <div data-ix="gray-title-fade-in" class="gray-title-block">
+        <p class="gray-title" style="color: {{section.settings.text_color}}">{{section.settings.titletext}}</p>
+      </div>
+      <div class="title-block">
+        <h2 data-ix="black-title-fade-in"  style="color: {{section.settings.subtitle_color}}">{{section.settings.subtitle}}</h2>
+        <div data-ix="paragraph-fade-in">
+        <p style="color: {{section.settings.content_color}}" class="intro-paragraph">{{section.settings.content}}{% if section.settings.linktext != blank %}</p>
+          <a href="{{section.settings.linkurl}}" class="link intro header1">{{section.settings.linktext}}</a>{% endif %}
+          <style>
+            .link{color: {{section.settings.linkcolor}};}
+            .link:hover{color: {{section.settings.linkcolor | color_darken: 18}} !important;}
+        </style>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Header 1",
+    "settings": [
+  {
+      "type": "color",
+      "id": "text_color",
+      "label": "Header color",
+      "default": "#F1F1F1"
+    },
+  {
+      "id": "titletext",
+      "type": "text",
+      "label": "Title",
+    "default": "recent work"
+    },
+    {
+    "type": "textarea",
+    "id": "subtitle",
+    "label": "Subtitle",
+    "default": "Enjoy some work i've recently finished."
+    },
+  {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#000"
+    },
+    {
+    "type": "textarea",
+    "id": "content",
+    "label": "Content",
+    "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+    },
+  {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#303030"
+    },
+  {
+      "id": "linktext",
+      "type": "text",
+      "label": "Link text",
+    "default": "My portfolio ›"
+    },
+  {
+      "id": "linkurl",
+      "type": "url",
+      "label": "Text link"
+    },
+  {
+      "type": "color",
+      "id": "linkcolor",
+      "label": "Link color",
+      "default": "#FFA34F"
+    },
+  {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "presets": [{
+    "name": "Header 1",
+    "category": "Boodl: Landing Pages"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

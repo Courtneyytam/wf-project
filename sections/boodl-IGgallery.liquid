@@ -1,0 +1,114 @@
+<div class="instagram-igg" style="max-width: 1190px;margin-left: auto;margin-right: auto; background-color: {{ section.settings.bgcolor }}; padding: {{ section.settings.padding }}px 0px;" >
+  {% if section.blocks[0].settings.imageBlock == blank and section.blocks[1].settings.imageBlock == blank and section.blocks[2].settings.imageBlock == blank and section.blocks[3].settings.imageBlock == blank and section.blocks[4].settings.imageBlock == blank %}
+      {% for i in (1..5) %}
+      <a href="#" target="_blank" class="instagram-photo-link-igg">
+          <div class="circle-button-igg instagram-button-igg">
+            <img src="https://www.boodl.xyz/images/instagram-icon-black.svg" class="circle-icon-igg" />
+            <div class="circle-base-igg"></div>
+          </div>
+          <img src="https://www.boodl.xyz/images/sq-placeholder{{i}}.jpg" 
+               sizes="(max-width: 479px) 50vw, (max-width: 767px) 32vw, (max-width: 991px) 16vw, 17vw"alt=""class="instagram-photo-igg" />
+        </a>
+      {%- endfor -%} 
+  {% elsif section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.button_link | url }}" target="_blank" 
+         class="instagram-photo-link-igg">
+        <div class="circle-button-igg instagram-button-igg">
+          <img src="{% if section.settings.mouseOverImage == blank%}https://www.boodl.xyz/images/instagram-icon-black.svg{% else %}{{ section.settings.mouseOverImage }}{% endif %}" alt="" class="circle-icon-igg" />
+          <div class="circle-base-igg"></div>
+        </div>
+        <img src="{% if block.settings.imageBlock == blank%}https://www.boodl.xyz/images/image-placeholder.png{% else %}{{ block.settings.imageBlock | img_url: '300x300' }}{% endif %}" 
+             sizes="(max-width: 479px) 50vw, (max-width: 767px) 32vw, (max-width: 991px) 16vw, 17vw" 
+             alt="" 
+             class="instagram-photo-igg" />
+      </a>
+    {%- endfor -%}  
+  {% else %}
+    <div>no blocks</div>
+  {% endif %}
+</div>
+{% schema %}
+  {
+    "name": "IG Image Gallery",
+  "max_blocks": 6,
+    "settings": [
+  {
+      "type":      "paragraph",
+      "content":   "For the best results, use square images!"
+    },
+    {
+      "type": "image_picker",
+      "id": "mouseOverImage",
+      "label": "Mouse over icon"
+    },
+  {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+      "id": "bgcolor",
+      "type": "color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type":   "range",
+      "id":     "padding",
+      "min":       24,
+      "max":       80,
+      "step":      8,
+      "unit":      "px",
+      "label":     "Section padding",
+      "default":   64
+    }
+  ],
+  "blocks": [
+    {
+    "type": "text_block",
+      "name": "Image Block",
+      "settings": [
+      {
+        "type": "image_picker",
+        "id": "imageBlock",
+        "label": "Image"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Hover link"
+      }
+    ]
+    }
+  ],
+  "presets": [
+      {
+        "name": "IG Image Gallery",
+        "category": "Boodl: Image Galleries",
+        "blocks": [
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          }
+        ]
+      }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

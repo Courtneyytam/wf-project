@@ -1,0 +1,199 @@
+{% assign sizes = "sizes='(max-width: 767px) 100vw, (max-width: 991px) 230px, 300px'"%}
+
+<div class="w-container masonry_container">
+  <style>
+    .masonry_container{
+      padding-top: {{ section.settings.padding }}px;
+        padding-bottom: {{ section.settings.padding }}px;
+      background-color: {{ section.settings.background_color }}
+    }
+  </style>
+    <div class="work-row w-row">
+      
+      <div class="masonry_columns _{{section.settings.numcol}}">
+        {% if section.blocks.size == 0 %}
+          
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/desert.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/kids.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/laptop.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+      
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/mountain-mirror.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/trees-and-birds.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/street-sunset.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+      
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/trees.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/sky-sunset.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+        <div class="work-link-block w-inline-block e-scroll-in">
+          <img src="https://www.boodl.xyz/images/mountain.jpg" {{sizes}} alt="" class="work-thumb-image">
+        </div>
+
+        {% else %}
+        {% for block in section.blocks %}
+          <div class="work-link-block w-inline-block e-scroll-in">
+            <img src="{% if block.settings.img == blank %}
+                      https://www.boodl.xyz/images/trees-and-birds.jpg
+                      {% else %}
+                      {{ block.settings.img | img_url: "master" }}
+                      {%endif%}" {{sizes}} alt="" class="work-thumb-image">
+          </div>
+        {% endfor %}
+        {%endif%}
+      </div>
+
+    </div>
+  </div>
+
+
+{% schema %}
+  {
+    "name": "Masonry Gallery",
+    "settings": [
+  {   
+      "type":   "range",
+      "id":     "numcol",
+      "min":       2,
+      "max":       4,
+      "step":      1,
+      "label":     "Number of columns",
+      "default":   3,
+    "info": "This only applies when the window width is greater than 1000px. Layout is responsive for mobile and tablets."
+    },
+  {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+      
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "blocks": [
+      {
+        "type": "img",
+        "name": "Image",
+    "settings": 
+    [
+            {
+                "id": "img",
+                "type": "image_picker",
+                "label": "Image"
+            }
+        ]
+      }
+    ],
+  "presets": [{
+    "name": "Masonry Gallery",
+    "category": "Boodl: Image Galleries"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.masonry_columns {
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+margin: 0px 10px;
+}
+
+.masonry_columns._3 {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-width: 33.33333333333333%;
+  -moz-column-width: 33.33333333333333%;
+  column-width: 33.33333333333333%;
+}
+
+.masonry_columns._2 {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-width: 50%;
+  -moz-column-width: 50%;
+  column-width: 50%;
+}
+
+.masonry_columns._4 {
+  -webkit-column-count: 4;
+  -moz-column-count: 4;
+  column-count: 4;
+  -webkit-column-width: 25%;
+  -moz-column-width: 25%;
+  column-width: 25%;
+}
+@media only screen and (max-width: 991px) {
+
+    .masonry_columns._4 {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-width: 33.33333333333333%;
+  -moz-column-width: 33.33333333333333%;
+  column-width: 33.33333333333333%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .masonry_columns._3 {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-width: 50%;
+    -moz-column-width: 50%;
+    column-width: 50%;
+  }
+    .masonry_columns._4 {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-width: 50%;
+    -moz-column-width: 50%;
+    column-width: 50%;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .masonry_columns._2, .masonry_columns._3, .masonry_columns._4 {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-width: 100%;
+    -moz-column-width: 100%;
+    column-width: 100%;
+  }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,295 @@
+{% assign opacity = section.settings.overlay | divided_by: 100.0 %}
+{% assign theme = section.settings.bgcolor %}
+{% assign textcolor = section.settings.textcolor %}
+
+<div class="textimg-section" style="
+    {% if section.settings.bgimg != blank %}
+    background-image: {% if section.settings.parallax %}linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),{% endif %} url({{ section.settings.bgimg | img_url: 'master' }});
+    {% else %}
+    background-image: {% if section.settings.parallax %}linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),{% endif %} url('https://www.boodl.xyz/images/trees-and-birds.jpg');
+    {% endif %}">
+  <div class="overlay" style="padding: {{ section.settings.padding }}px 10%; background-color: {{ theme | color_modify: 'alpha', opacity }};">
+    <div class="{{ section.settings.scrollin }}">
+    <h3 class="textimgtext" style="font-size:{{ section.settings.fontsize }}px; font-weight:{{ section.settings.weight }};">{{ section.settings.content }}</h3>
+    <p class="textimgtext" style="margin-bottom: 0px;">{{ section.settings.text }}</p>
+    {% if section.settings.button %}<div class="ti_button_wrap" ><a href="{{ section.settings.buttonlink }}">
+      <button class="btn ti-custombtncolor">{{ section.settings.buttontext }}</button>
+      </a></div>{% endif %}
+    </div>
+      <style>
+        .textimgtext{
+          text-align: {{ section.settings.textalign }};
+          color:{{ textcolor }};
+        }
+        .ti_button_wrap {
+          float: {{ section.settings.textalign }};
+          margin-top: {{ section.settings.space }}px;
+        }
+        .ti-custombtncolor{
+            {%if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color }}; {% endif %}
+            {%if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }}; {% endif %}
+        }
+        .ti-custombtncolor:hover{
+            {%if section.settings.btn_color != blank %} background-color:{{ section.settings.btn_color | color_darken: 10 }} !important; {% endif %}
+            {%if section.settings.btntext_color != blank %} color:{{ section.settings.btntext_color }} !important; {% endif %}
+        }
+    </style>
+
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Statement text",
+    "settings": [
+    {
+            "type": "header",
+            "content": "Background image"
+        },
+    {
+            "id": "bgimg",
+            "type": "image_picker",
+            "label": "Background image"
+        },
+    {
+            "id": "bgcolor",
+            "type": "color",
+            "label": "Overlay color",
+      "default": "#000000"
+        },
+    {
+            "type":   "range",
+            "id":     "overlay",
+            "min":       0,
+            "max":       100,
+            "step":      10,
+            "unit":      "%",
+            "label":     "Overlay Darkness",
+            "default":   70
+      },
+    {
+            "type": "header",
+            "content": "Content"
+        },
+    {
+            "type": "textarea",
+            "id": "content",
+            "label": "Main Text",
+            "default": "Our ships have completed their scan of the area and found nothing. If the Millennium Falcon went into light-speed."
+        },
+    {
+            "type":   "range",
+            "id":     "fontsize",
+            "min":       16,
+            "max":       80,
+            "step":      4,
+            "unit":      "px",
+            "label":     "Font size",
+            "default":   32
+      },
+    {
+            "id": "textcolor",
+            "type": "color",
+            "label": "Text color",
+      "default": "#ffffff"
+        },
+    {
+            "type": "select",
+            "id": "weight",
+            "label": "Font weight",
+            "default": "700",
+            "options": [
+              {
+                "label": "Light",
+                "value": "100"
+              },
+              {
+                "label": "Medium",
+                "value": "500"
+              },
+              {
+                "label": "Bold",
+                "value": "700"
+              }
+            ]
+        },
+    {
+            "id": "text",
+            "type": "text",
+            "label": "Subtext"
+        },
+    {
+            "type": "header",
+            "content": "Call to Action Button"
+        },
+    {
+            "type":      "checkbox",
+            "id":        "button",
+            "label":     "Include Call to Action",
+            "default":   true
+        },
+    {
+      "type": "text",
+            "id": "buttontext",
+            "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+            "id": "buttonlink",
+            "label": "Button Link"
+    },
+    {
+            "id": "btn_color",
+            "type": "color",
+            "label": "Button color"
+        },
+    {
+            "id": "btntext_color",
+            "type": "color",
+            "label": "Button Text color"
+        },
+    {
+            "type":   "range",
+            "id":     "space",
+            "min":       16,
+            "max":       96,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Space between text and button",
+            "default":   24
+      },
+    {
+            "type": "header",
+            "content": "Section styling"
+        },
+    {
+            "type": "select",
+            "id": "textalign",
+            "label": "Content alignment",
+            "default": "center",
+            "options": [
+              {
+                "label": "Center",
+                "value": "center"
+              },
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              }
+            ]
+        },
+    {
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       96,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   64
+      },
+    {
+            "type": "header",
+            "content": "Animations"
+        },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+           "type":      "checkbox",
+           "id":        "parallax",
+           "label":     "Image parallax effect",
+           "default":   true
+        },
+    {
+            "type": "select",
+            "id": "scrollin",
+            "label": "On scroll text animation",
+            "default": "e-scroll-in",
+            "options": [
+              {
+                "label": "Scroll in from bottom",
+                "value": "e-scroll-in"
+              },
+              {
+                "label": "Scroll in from left",
+                "value": "e-scroll-in-left"
+              },
+              {
+                "label": "Scroll in from right",
+                "value": "e-scroll-in-right"
+              },
+              {
+                "label": "No animation",
+                "value": "e"
+              }
+            ]
+        }
+  ],
+  "presets": [{
+    "name": "Statement text",
+    "category": "Boodl: Title Headers"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.ti_button_wrap {
+  display: block;
+  margin-top: 16px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+
+.textimg-section {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-position: 0px 0px, 50% 50%;
+  background-size: cover;
+  background-repeat: repeat, no-repeat;
+  background-attachment: scroll, fixed;
+  color: #fff;
+}
+
+.overlay{
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 479px) {
+  .overlay {
+      padding: 50px 16px !important;
+    }
+
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

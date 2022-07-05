@@ -1,0 +1,369 @@
+<div class="hs1-products">
+  <div class="{{ section.settings.onscroll }}">
+    <div class="hs1_title_wrap">
+      <h2 class="hs1_title">{{ section.settings.titletext }}</h2>
+      <h1 class="hs1_h2">{{ section.settings.headline }}</h1>
+    </div>
+    <div class="hs1_container">
+    {% if section.settings.collection == blank %}
+
+          <div class="hs1_card card_width_{{ section.settings.limit }}"><img src="https://www.boodl.xyz/images/converse-shop.png" class="hs1_img">
+              <h3 class="hs1_h3">Converse All Star High</h3>
+              <span class="hs1_text">The Converse All Star shoes were originally released in 1917 as a basketball shoe and have been worn by some of the biggest stars. </span>
+              <div class="m01_button_wrap"><a href="#" class=""><button class="btn">{{section.settings.buttontext}}</button></a></div>
+            </div>
+
+          <div class="hs1_card card_width_{{ section.settings.limit }}"><img src="https://www.boodl.xyz/images/airmax-shop.png" class="hs1_img">
+              <h3 class="hs1_h3">Nike Air Max 97</h3>
+              <span class="hs1_text">Guaranteed a cool, casual and athletic look; the Air 97 also has excellent comfort due to the cushioning air sole.</span>
+              <div class="m01_button_wrap"><a href="#" class=""><button class="btn">{{section.settings.buttontext}}</button></a></div>
+            </div>
+
+          <div class="hs1_card card_width_{{ section.settings.limit }}"><img src="https://www.boodl.xyz/images/vans-shop.png" class="hs1_img">
+              <h3 class="hs1_h3">Vans Ua Classic Slip-On</h3>
+              <span class="hs1_text">The Vans Slip On is a trendy casual shoe with retro charm that will delight any sneaker fan. The flat linen shoe fits any of your outfits. </span>
+              <div class="m01_button_wrap"><a href="#" class=""><button class="btn">{{section.settings.buttontext}}</button></a></div>
+            </div>
+
+        {% endif %}
+
+      {%- assign collection = collections[section.settings.collection] -%}
+      {% for product in collection.products limit: section.settings.limit %}
+
+      <div class="hs1_card card_width_{{ section.settings.limit }}"><img src="{{ product.featured_image | img_url: '400x' }}" class="hs1_img">
+        <h3 class="hs1_h3">{{ product.title }}</h3>
+        <span class="hs1_text">{{ product.content }}</span>
+        <div class="m01_button_wrap"><a href="{{ product.url }}" class=""><button class="btn">{{section.settings.buttontext}}</button></a></div>
+      </div>
+            {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hottest Sellers",
+    "settings": [
+    {
+      "type": "text",
+            "id": "titletext",
+            "label": "Section title",
+      "default": "Hottest Sellers"
+    },
+    {
+      "type": "text",
+            "id": "headline",
+            "label": "Section headline",
+      "default": "Product Headline"
+    },
+    {
+      "type": "collection",
+            "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+            "id": "buttontext",
+            "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+            "type": "range",
+            "id": "limit",
+            "label": "Number of products",
+            "min": 2,
+            "max": 6,
+            "step": 1,
+            "default": 3
+         },
+    {
+      "type": "header",
+        "content": "Animations"
+    },
+    {
+           "type":      "paragraph",
+           "content":   "Save page to see changes"
+        },
+    {
+           "type": "select",
+           "id": "onscroll",
+           "options": [
+        { "value": "", "label": "No animation"},
+              { "value": "e-scroll-in-left", "label": "From left"},
+              { "value": "e-scroll-in-right", "label": "From right"},
+        { "value": "e-scroll-in", "label": "From bottom"}
+           ],
+           "label": "Appear on scroll",
+      "default": ""
+        },
+    {
+      "type": "header",
+        "content": "Style Section"
+    },
+    {
+           "type": "color",
+           "id": "background_color",
+           "label": "Background color",
+           "default": "#ffffff"
+        },
+    {
+
+            "type":   "range",
+            "id":     "padding",
+            "min":       24,
+            "max":       80,
+            "step":      8,
+            "unit":      "px",
+            "label":     "Section padding",
+            "default":   40
+      }
+  ],
+  "presets": [
+  {
+    "name": "Hottest Sellers",
+    "category": "Boodl: Products"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+.card_width_2{
+  width: 45%;
+}
+
+.card_width_3, .card_width_6, .card_width_5{
+  width: 30%;
+}
+
+.card_width_4{
+  width: 24%;
+}
+
+.hs1_img{
+  margin-bottom: 24px;
+  max-width: 80%;
+}
+
+
+.hs1-products {
+  display: block;
+  min-height: 500px;
+  padding: 80px 5%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.hs1_h2 {
+  margin: 0px auto 56px;
+  font-size: 38px;
+  line-height: 42px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hs1_container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.hs1_line {
+  width: 1px;
+  min-height: 55px;
+  margin: 25px auto;
+  background-color: #d8dcee;
+}
+
+.hs1_card {
+  align-self: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 24px 12px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 10px;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.hs1_card:hover {
+  box-shadow: 7px 7px 55px 0 #ebecf0;
+  -webkit-transform: translate(0px, -4px);
+  -ms-transform: translate(0px, -4px);
+  transform: translate(0px, -4px);
+}
+
+.hs1_h3 {
+  margin-top: 0px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.hs1_title_wrap {
+  display: block;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.hs1_title {
+  text-align: center;
+}
+
+.hs1_text {
+  max-width: 500px;
+  text-align: center;
+}
+
+.m01_button_wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 16px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.m01_button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 130px;
+  margin-right: 8px;
+  padding: 12px 28px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 2px solid #dce1e7;
+  border-radius: 4px;
+  background-color: transparent;
+  -webkit-transition: all 350ms cubic-bezier(.455, .03, .515, .955);
+  transition: all 350ms cubic-bezier(.455, .03, .515, .955);
+  color: #33334f;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.m01_button_02 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 130px;
+  margin-right: 0px;
+  padding: 12px 28px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #5b7fff;
+  -webkit-transition: all 350ms cubic-bezier(.455, .03, .515, .955);
+  transition: all 350ms cubic-bezier(.455, .03, .515, .955);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.m01_button_02:hover {
+  background-color: #5375ee;
+}
+
+@media (max-width: 991px) {
+  .hs1_card {
+    width: 49%;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 479px) {
+  .hs1_h2 {
+    position: static;
+    display: block;
+    overflow: visible;
+    float: none;
+    white-space: normal;
+  }
+  .hs1_card {
+    width: 100%;
+  }
+  .m01_button {
+    margin-bottom: 8px;
+  }
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
